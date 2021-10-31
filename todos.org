@@ -7,11 +7,11 @@
 *** DONE constructeur avec nom
 *** DONE méthode ajouter préférences
 ** TODO Classe equipage => Bastien (-> juste debut classe + 1ere methode)
-*** TODO attribut nb pirates
-*** TODO attribut liste de pirates
-*** TODO attribut matrice adjacence
-*** TODO attribut pour stocker affectation pirate->trésor (=résultat algo de partage)
-*** TODO méthode ajouter relation entre deux pirates (relation = ne s'aiment pas)
+*** DONE attribut nb pirates
+*** DONE attribut liste de pirates
+*** DONE attribut matrice adjacence
+*** DONE attribut pour stocker affectation pirate->trésor (=résultat algo de partage)
+*** DONE méthode ajouter relation entre deux pirates (relation = ne s'aiment pas)
 *** TODO méthode ajout de préférences pour un pirate donné
 *** TODO méthode échange objets
 *** TODO méthode solution naïve

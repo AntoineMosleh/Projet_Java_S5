@@ -5,7 +5,8 @@
  */
 public class Pirate    
 {
-    private String nomPirate; //  represente le nom du pirate
+    //private String nomPirate; //  represente le nom du pirate
+    private char nomPirate; //  represente le nom du pirate
     private int[] listePref; // represente la liste des objets préferés de chaque pirate.
 
     /**
@@ -14,7 +15,7 @@ public class Pirate
      * @param nbPirate le nombre de pirates qui sera egale au nombres d'objets pour chaque pirates
      */
 
-    public Pirate(String np,int nbPirate)
+    public Pirate(char np,int nbPirate)
     {
         setNomPirate(np);
         listePref = new int[nbPirate];
@@ -26,7 +27,7 @@ public class Pirate
      * @return
      */
 
-    public String  getNomPirate()
+    public char  getNomPirate()
     {
         return this.nomPirate;
     }
@@ -36,7 +37,7 @@ public class Pirate
      * @param nomPirate le nom du pirate a ajouter
      */
 
-    public void setNomPirate(String nomPirate)
+    public void setNomPirate(char nomPirate)
     {
         this.nomPirate=nomPirate;
     }
