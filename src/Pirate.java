@@ -24,7 +24,7 @@ public class Pirate
 
     /**
      * Methode permettant de recuperer le nom du pirate
-     * @return
+     * @return le nom du pirate
      */
 
     public char  getNomPirate()
@@ -44,7 +44,7 @@ public class Pirate
 
     /**
      * permet de recuperer la liste de preferance des objets d'un pirate
-     * @return
+     * @return la liste de reference
      */
 
     public int[] getListePref()
@@ -58,7 +58,7 @@ public class Pirate
      */
 
 
-    public void ajoutPreferance(int[] preferences)
+    public void ajoutPreference(int[] preferences)
     {
         for(int i=0;i<preferences.length;i++)
         {

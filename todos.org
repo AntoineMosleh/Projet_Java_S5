@@ -12,14 +12,14 @@
 *** DONE attribut matrice adjacence
 *** DONE attribut pour stocker affectation pirate->trésor (=résultat algo de partage)
 *** DONE méthode ajouter relation entre deux pirates (relation = ne s'aiment pas)
-*** TODO méthode ajout de préférences pour un pirate donné
+*** DONE méthode ajout de préférences pour un pirate donné
 *** TODO méthode échange objets
 *** TODO méthode solution naïve
 *** TODO méthode affichage solution actuelle
 *** TODO méthode affichage du coût
 ** TODO Main
 *** TODO Demander à l'utilisateur le nb de pirates ([1;26])
-*** TODO Menu permettant les actions :
+*** TODO Menu permettant les actions 
 **** TODO Ajouter une relation
 **** TODO Ajouter des préférences
 **** TODO Fin

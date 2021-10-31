@@ -12,7 +12,7 @@ public class Equipage
 	private List<Pirate>		listePirates; //Liste des pirates de l'equipage
 	private boolean[][]			matriceAdjacence; //Liste d'adjacence pour representer
 												  //les relations entre les pirates
-	private Map<String,Integer>	affectationTresors; //Tableau contenant l'affectation
+	private Map<Character,Integer>	affectationTresors; //Tableau contenant l'affectation
 													//du trésor par pirate
 
 	/**
@@ -64,5 +64,38 @@ public class Equipage
 		int j = (int)p2 - 'A';
 		matriceAdjacence[i][j] = true;
 		matriceAdjacence[j][i] = true;
+	}
+	/**
+	 * Ajout d'une liste d'objet de preference pour un pirate donné
+	 * @param nomP le nom du pirate concerné
+	 * @param pref liste d'objet de preferences
+	 */
+
+	public void ajoutPreferencePirate(char nomP,int[] pref)
+	{
+		for(int i=0;i<listePirates.size();i++)
+		{
+			if (listePirates.get(i).getNomPirate()==nomP)
+			{
+				listePirates.get(i).ajoutPreference(pref);
+			}
+
+		}
+	}
+	/**
+	 * Echange d'objets entre 2 pirates donné en parametre
+	 * @param pirate1 nom du premier pirate
+	 * @param pirate2 nom du deuxieme pirate
+	 */
+
+	public void echangeObjet(char pirate1,char pirate2)
+	{
+		if (affectationTresors.containsKey(pirate1) && affectationTresors.containsKey(pirate2))
+		{
+			Integer objet_ephemere =affectationTresors.get(pirate1);
+			affectationTresors.replace(pirate1, affectationTresors.get(pirate2));
+			affectationTresors.replace(pirate2, objet_ephemere);			
+		}
+
 	}
 }
