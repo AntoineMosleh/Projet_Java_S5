@@ -13,7 +13,7 @@
 *** DONE attribut pour stocker affectation pirate->trésor (=résultat algo de partage)
 *** DONE méthode ajouter relation entre deux pirates (relation = ne s'aiment pas)
 *** DONE méthode ajout de préférences pour un pirate donné
-*** TODO méthode échange objets
+*** DONE méthode échange objets
 *** TODO méthode solution naïve
 *** TODO méthode affichage solution actuelle
 *** TODO méthode affichage du coût

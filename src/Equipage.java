@@ -28,7 +28,6 @@ public class Equipage
 		this.initMatrice();
 	}
 
-
 	/**
 	 * Initialisation de la liste de pirates */
 	private void initPirates()
@@ -39,7 +38,6 @@ public class Equipage
 			listePirates.add(new Pirate(nom++, nbPirates));
 
 	}
-
 
 	/**
 	 * Initialisation de la matrice d'adjacence */
@@ -65,12 +63,12 @@ public class Equipage
 		matriceAdjacence[i][j] = true;
 		matriceAdjacence[j][i] = true;
 	}
+
 	/**
 	 * Ajout d'une liste d'objet de preference pour un pirate donné
 	 * @param nomP le nom du pirate concerné
 	 * @param pref liste d'objet de preferences
 	 */
-
 	public void ajoutPreferencePirate(char nomP,int[] pref)
 	{
 		for(int i=0;i<listePirates.size();i++)
@@ -82,12 +80,12 @@ public class Equipage
 
 		}
 	}
+
 	/**
 	 * Echange d'objets entre 2 pirates donné en parametre
 	 * @param pirate1 nom du premier pirate
 	 * @param pirate2 nom du deuxieme pirate
 	 */
-
 	public void echangeObjet(char pirate1,char pirate2)
 	{
 		if (affectationTresors.containsKey(pirate1) && affectationTresors.containsKey(pirate2))
@@ -97,5 +95,24 @@ public class Equipage
 			affectationTresors.replace(pirate2, objet_ephemere);			
 		}
 
+	}
+
+	/**
+	 * Affichage de la matrice d'adjacence (principalement pour les tests) */
+	public void afficherRelations()
+	{
+		int	i;
+		int	j;
+		int	n;
+
+		for (i = 0; i < nbPirates; i++)
+		{
+			for (j = 0; j < nbPirates; j++)
+			{
+				n = matriceAdjacence[i][j] == true ? 1 : 0;
+				System.out.print(n + " ");
+			}
+			System.out.println();
+		}
 	}
 }
