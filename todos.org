@@ -1,11 +1,11 @@
 #+TITLE: Todos
 
 * TODO RENDU 1 : Programme de gestion d'équipage
-** TODO Classe pirate => Antoine
-*** TODO attribut nom
-*** TODO attribut liste de préférences (vide au début)
-*** TODO constructeur avec nom
-*** TODO méthode ajouter préférences
+** DONE Classe pirate => Antoine
+*** DONE attribut nom
+*** DONE attribut liste de préférences (vide au début)
+*** DONE constructeur avec nom
+*** DONE méthode ajouter préférences
 ** TODO Classe equipage => Bastien (-> juste debut classe + 1ere methode)
 *** TODO attribut nb pirates
 *** TODO attribut liste de pirates
