@@ -2,6 +2,6 @@
 
 * Liste des choses à faire
 
-** TODO créer une classe pirate [0/2] [0%]
-+ [ ] Code pour ajouter une relation
-+ [ ] Code pour ajouter des préférences
+** TODO créer une classe pirate 
+*** TODO Code pour ajouter une relation
+*** TODO Code pour ajouter des préférences
