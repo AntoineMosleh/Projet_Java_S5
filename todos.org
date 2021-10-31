@@ -1,7 +1,22 @@
 #+TITLE: Todos
 
-* Liste des choses à faire
-
-** TODO créer une classe pirate 
-*** TODO Code pour ajouter une relation
-*** TODO Code pour ajouter des préférences
+* TODO RENDU 1 : Programme de gestion d'équipage
+** TODO Classe equipage
+*** TODO méthode ajouter relation entre deux pirates (relation = ne s'aiment pas)
+*** TODO méthode ajout de préférences pour un pirate donné
+*** TODO méthode échange objets
+*** TODO méthode solution naïve
+*** TODO méthode affichage solution actuelle
+*** TODO stocker affectation objets dans la classe
+** TODO Main
+*** TODO Demander à l'utilisateur le nb de pirates ([1;26])
+*** TODO Menu permettant les actions :
+**** TODO Ajouter une relation
+**** TODO Ajouter des préférences
+**** TODO Fin
+*** TODO Menu présenté après la configuration de l'équipage :
+**** TODO Proposer solution naïve
+**** TODO Échanger objets (échange les objets de deux pirates)
+**** TODO Afficher coût (solution actuelle)
+**** TODO Fin
+** TODO Rendre projet
