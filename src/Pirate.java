@@ -60,14 +60,7 @@ public class Pirate
 
     public void ajoutPreference(int[] preferences)
     {
-        for(int i=0;i<preferences.length;i++)
-        {
+        for(int i=0;i<listePref.length;i++)
             listePref[i]=preferences[i];
-        }
-        
-
     }
-
-    
-
 }

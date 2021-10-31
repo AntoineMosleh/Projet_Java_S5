@@ -7,6 +7,7 @@ public class Main
 		int	nbPirates;
 
 		nbPirates = askNbPirates();
+		// nbPirates = 4;
 		menuPirate(nbPirates);
 	}
 
@@ -29,7 +30,32 @@ public class Main
         Scanner		sc = new Scanner(System.in);
 		int			choix;
 		Equipage	e = new Equipage(nbPirates);
-
+		// e.ajouterRelation('A','B');
+		// e.ajouterRelation('B','C');
+		// e.ajouterRelation('B','D');
+		// int[] pref = new int[nbPirates];
+		// pref[0] = 1;
+		// pref[1] = 2;
+		// pref[2] = 3;
+		// pref[3] = 4;
+		// e.ajoutPreferencePirate('A', pref);
+		// pref[0] = 1;
+		// pref[1] = 3;
+		// pref[2] = 2;
+		// pref[3] = 4;
+		// e.ajoutPreferencePirate('B', pref);
+		// pref[0] = 3;
+		// pref[1] = 2;
+		// pref[2] = 1;
+		// pref[3] = 4;
+		// e.ajoutPreferencePirate('C', pref);
+		// pref[0] = 1;
+		// pref[1] = 4;
+		// pref[2] = 2;
+		// pref[3] = 3;
+		// e.ajoutPreferencePirate('D', pref);
+		// e.solutionNaive();
+		// e.afficherSolution();
 		do
 		{
 			System.out.println("1 ajouter une relation");

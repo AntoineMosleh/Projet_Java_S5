@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Collection;
 
 /**
  * Classe de gestion d'un équipage de pirates
@@ -23,7 +24,7 @@ public class Equipage
 		this.nbPirates = nbPirates;
 		this.listePirates = new ArrayList<Pirate>(nbPirates);
 		matriceAdjacence = new boolean[nbPirates][nbPirates];
-		affectationTresors = new HashMap<Character,Integer>();
+		affectationTresors = new HashMap<Character,Integer>(nbPirates);
 		this.initPirates();
 		this.initMatrice();
 	}
@@ -77,8 +78,16 @@ public class Equipage
 			{
 				listePirates.get(i).ajoutPreference(pref);
 			}
-
 		}
+	}
+
+	/* Methode de recherche de pirate, au cas où*/
+	private Pirate findPirate(char nom)
+	{
+		for (Pirate p : listePirates)
+			if (p.getNomPirate() == nom)
+				return (p);
+		return (null);
 	}
 
 	/**
@@ -97,6 +106,61 @@ public class Equipage
 
 	}
 
+	/**
+	 * Methode de resolution naive du problème */
+	public void	solutionNaive()
+	{
+		int[]	tresorsDonnes = new int[nbPirates];
+		int		i;
+		int		j;
+
+		for (i = 0; i < nbPirates; i++)
+			tresorsDonnes[i] = 0;
+
+		for (Pirate p : listePirates)
+		{
+			i = 0;
+			while (i < nbPirates && affectationTresors.containsValue(p.getListePref()[i]))
+				i++;
+			affectationTresors.put(p.getNomPirate(),p.getListePref()[i]);
+		}
+	}
+
+	// private boolean is_contained(int[] tab, int n)
+	// {
+	// 	for (int x : tab)
+	// 		if (x == n)
+	// 			return (true);
+	// 	return (false);
+	// }
+	//
+
+	/**
+	 * Methode pour afficher la solution actuelle de l'équipage */
+	public void afficherSolution()
+	{
+		char	nom = 'A';
+
+		if (affectationTresors.isEmpty())
+			return;
+		System.out.println("Solution actuelle : ");
+		for (nom = 'A'; nom - 'A' < nbPirates; nom++)
+			System.out.println(nom + " : " + affectationTresors.get(nom));
+	}
+
+	// private int	calculCout()
+	// {
+	// 	for (Pirate p : listePirates)
+	// 	{
+
+	// 	}
+	// }
+
+	// public void afficherCout()
+	// {
+
+	// }
+	
 	/**
 	 * Affichage de la matrice d'adjacence (principalement pour les tests) */
 	public void afficherRelations()

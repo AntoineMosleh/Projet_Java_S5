@@ -14,12 +14,12 @@
 *** DONE méthode ajouter relation entre deux pirates (relation = ne s'aiment pas)
 *** DONE méthode ajout de préférences pour un pirate donné
 *** DONE méthode échange objets
-*** TODO méthode solution naïve
-*** TODO méthode affichage solution actuelle
+*** DONE méthode solution naïve
+*** DONE méthode affichage solution actuelle
 *** TODO méthode affichage du coût
 ** TODO Main
-*** TODO Demander à l'utilisateur le nb de pirates ([1;26])
-*** TODO Menu permettant les actions 
+*** DONE Demander à l'utilisateur le nb de pirates ([1;26])
+*** TODO Menu permettant les actions
 **** TODO Ajouter une relation
 **** TODO Ajouter des préférences
 **** TODO Fin
