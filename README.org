@@ -5,6 +5,8 @@ Projet du cours de java avancé du S5.
 * Table des matières :TOC:
 - [[#contexte][Contexte]]
 - [[#utilisation-du-logiciel][Utilisation du logiciel]]
+- [[#précisions-internes-au-code][Précisions internes au code]]
+  - [[#premier-rendu][Premier rendu]]
 
 * Contexte
 Après chaque pillage de navire, le capitaine d’un bateau pirate se sert en premier, puis répartit le reste du butin entre les membres de son équipage. Parmi toutes les richesses qu’il n’a pas gardées pour lui, il laisse un objet précieux à chaque pirate. Pour apaiser les tensions sur son navire, il demande à chaque pirate de lui donner ses préférences sur les objets à partager, et il essaye de les respecter au mieux. En plus de leurs préférences, il tient compte des relations au sein de l’équipage. Certains pirates s’apprécient peu, et s’il y a des sources de jalousies entre eux, cela pourraitmener à des disputes ou une mutinerie...
@@ -16,3 +18,11 @@ Le capitaine pirate nous demande de l’aider, en développant un logiciel qui p
 Nous réaliserons ces tâches de façon incrémentale, afin d'avoir à la fin du semestre un logiciel fonctionnel.
 
 * Utilisation du logiciel
+
+* Précisions internes au code
+** Premier rendu
+*** Représentation des objets
++ Pirates avec lettres de l'alphabet (26 pirates max au début)
++ Trésors numérotés de 1 à n (n = nb de pirates)
+*** Implémentation algorithme naïf de résolution du problème
+*** L'utilisateur peut modifier la solution proposée pour essayer de faire une solution optimale

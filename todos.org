@@ -1,13 +1,22 @@
 #+TITLE: Todos
 
 * TODO RENDU 1 : Programme de gestion d'équipage
-** TODO Classe equipage
+** TODO Classe pirate => Antoine
+*** TODO attribut nom
+*** TODO attribut liste de préférences (vide au début)
+*** TODO constructeur avec nom
+*** TODO méthode ajouter préférences
+** TODO Classe equipage => Bastien (-> juste debut classe + 1ere methode)
+*** TODO attribut nb pirates
+*** TODO attribut liste de pirates
+*** TODO attribut matrice adjacence
+*** TODO attribut pour stocker affectation pirate->trésor (=résultat algo de partage)
 *** TODO méthode ajouter relation entre deux pirates (relation = ne s'aiment pas)
 *** TODO méthode ajout de préférences pour un pirate donné
 *** TODO méthode échange objets
 *** TODO méthode solution naïve
 *** TODO méthode affichage solution actuelle
-*** TODO stocker affectation objets dans la classe
+*** TODO méthode affichage du coût
 ** TODO Main
 *** TODO Demander à l'utilisateur le nb de pirates ([1;26])
 *** TODO Menu permettant les actions :
