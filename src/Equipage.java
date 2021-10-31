@@ -23,7 +23,7 @@ public class Equipage
 		this.nbPirates = nbPirates;
 		this.listePirates = new ArrayList<Pirate>(nbPirates);
 		matriceAdjacence = new boolean[nbPirates][nbPirates];
-		affectationTresors = new HashMap<String,Integer>();
+		affectationTresors = new HashMap<Character,Integer>();
 		this.initPirates();
 		this.initMatrice();
 	}
