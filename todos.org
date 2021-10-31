@@ -1,0 +1,7 @@
+#+TITLE: Todos
+
+* Liste des choses à faire
+
+** TODO créer une classe pirate [0/2] [0%]
++ [ ] Code pour ajouter une relation
++ [ ] Code pour ajouter des préférences
