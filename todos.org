@@ -16,7 +16,7 @@
 *** DONE méthode échange objets
 *** DONE méthode solution naïve
 *** DONE méthode affichage solution actuelle
-*** TODO méthode affichage du coût
+*** DONE méthode affichage du coût
 ** TODO Main
 *** DONE Demander à l'utilisateur le nb de pirates ([1;26])
 *** TODO Menu permettant les actions

@@ -125,6 +125,118 @@ public class Equipage
 			affectationTresors.put(p.getNomPirate(),p.getListePref()[i]);
 		}
 	}
+	/**
+	 * Methode permettant de dire si deux pirates peuvent etre jaloux entre eux
+	 * @param pirate1 le premier pirate
+	 * @param pirate2 le deuxieme pirate
+	 * @return true si les deux pirates peuvent etre jaloux et false sinon
+	 */
+	public boolean rechercherJaloux(char pirate1,char pirate2)
+	{
+		int i = (int)pirate1 - 'A';
+		int j = (int)pirate2 - 'A';
+
+		if (matriceAdjacence[i][j]== true && matriceAdjacence[j][i]==true)
+		{
+			return true;
+
+		}
+		else
+		{
+			return false;
+
+		}
+	}
+	
+    /**
+    * methodes permettant de rechercher l'indice de l'objet obtenu par le pirate dans sa liste d'objet de preference
+    * @param ratpi le pirate
+    * @return l'indice de l'objet obtenu dans sa liste de preference si il est present, retourne -1 sinon
+    */
+	public int rechercheIndiceObjet(char ratpi)
+	{
+		Integer objet = affectationTresors.get(ratpi);
+		int indice=-1;
+		int [] tab;
+		for (int i=0;i<listePirates.size();i++)
+		{
+			if (listePirates.get(i).getNomPirate() == ratpi)
+			{
+				tab = listePirates.get(i).getListePref();
+				for(int j=0;j<tab.length;j++)
+				{
+					if (tab[j]==objet)
+					{
+						indice=j;
+					}
+				}
+
+			}
+		}
+		return indice;
+	}
+
+/**
+ * Methode permettant de retourner l'indice d'un objet donné dans la liste de preference d'un pirate donné
+ * @param nomPirate nom du pirate
+ * @param objet objet dont l'indice est a trouvé
+ * @return l'indice de l'objet dans la liste de preference du pirate
+ */
+	public int rechercheIndiceParapportAObjet(char nomPirate,Integer objet)
+	{
+		Pirate pirate=null;
+		int indice_objet=-1;
+		int tab[];
+		for(int i=0;i<listePirates.size();i++)
+		{
+			if (listePirates.get(i).getNomPirate()==nomPirate)
+			{
+				pirate=listePirates.get(i);
+			}
+		}
+		tab=pirate.getListePref();
+		for(int j=0;j<tab.length;j++)
+		{
+			if(tab[j]==objet)
+			{
+				indice_objet=j;
+			}
+		}
+		return indice_objet;
+	}
+
+
+    /**
+	 * Methode permettant de calculer le cout 
+	 * @return le cout
+	 */
+	public int afficherCout()
+	{
+		int cout=0;
+		for(int i=0;i<listePirates.size();i++)
+		{
+			char pirate1 =listePirates.get(i).getNomPirate();
+			Integer objet_pirate1=affectationTresors.get(pirate1);
+			for(int j=0;j<listePirates.size();j++)
+			{
+				char pirate2 =listePirates.get(j).getNomPirate();
+				Integer objet_pirate2=affectationTresors.get(pirate2);
+				if(rechercherJaloux(pirate1, pirate2)) 
+				{
+					int indice_objet_pirate1=rechercheIndiceObjet(pirate1);
+					int indice_objet_pirate2=rechercheIndiceObjet(pirate2);
+					int indice_objetDePirate2_dansPirate1=rechercheIndiceParapportAObjet(pirate1,objet_pirate2 );
+					int indice_objetDePirate1_dansPirate2=rechercheIndiceParapportAObjet(pirate2,objet_pirate1 );
+					if ( indice_objetDePirate1_dansPirate2<indice_objet_pirate2 || indice_objetDePirate2_dansPirate1<indice_objet_pirate1)
+					{
+						cout=cout+1;
+					}
+				}
+
+			}
+		}
+		return cout;
+	}
 
 	// private boolean is_contained(int[] tab, int n)
 	// {
