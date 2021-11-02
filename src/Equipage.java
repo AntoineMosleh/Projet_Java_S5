@@ -291,4 +291,34 @@ public class Equipage
 			System.out.println();
 		}
 	}
+
+	public List<Pirate> getListePirate()
+	{
+		return listePirates;
+	}
+
+	public boolean containList(char nom)
+	{
+		ArrayList<Character> listNom;
+		listNom = new ArrayList<Character>();
+		for (int i=0; i<listePirates.size(); i++)
+		{
+			listNom.add(listePirates.get(i).getNomPirate());
+		}
+		if(listNom.contains(nom))
+			return true;
+		return false;
+	}
+
+	public boolean[][] getMatriceAdjacence()
+	{
+		return matriceAdjacence;
+	}
+
+	public boolean relationExiste(char pirate1, char pirate2)
+	{
+		int i = pirate1 - 'A';
+		int j = pirate2 - 'A';
+		return matriceAdjacence[i][j];
+	}
 }

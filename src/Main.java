@@ -4,32 +4,78 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		int	nbPirates;
-
+		int			nbPirates;
+		Equipage 	equipage;
 		nbPirates = askNbPirates();
+		equipage = new Equipage(nbPirates);
 		// nbPirates = 4;
-		menuPirate(nbPirates);
+		menuPirate(nbPirates, equipage);
 	}
 
+	public static void relationPirate(Equipage equipage){
+		Scanner		sc = new Scanner(System.in);
+		char 		pirateJaloux1;
+		int 		nombrePirate; 
+		char 		pirateJaloux2;
+		boolean 	verif;
+		
+		do 
+		{
+			System.out.println("Designez le pirate jaloux : ");
+			pirateJaloux1 = sc.next().charAt(0);
+			verif = equipage.containList(pirateJaloux1);
+			if(verif == false)
+				System.out.println("Le pirate " + pirateJaloux1 + " n'existe pas");
+		} 
+		while (verif == false);
+		do
+		{
+			System.out.println("Indiquez le nombre de pirates dont il est jaloux : ");
+			nombrePirate = sc.nextInt();
+			if(nombrePirate<equipage.getListePirate().size()-1)
+				verif = true ;
+			if(verif == false)
+				System.out.println("Le pirate ne peut posseder plus de mauvaises relations que de pirates ! ");
+		} 
+		while(verif == false);
+		for (int i=0; i<nombrePirate; i++)
+		{	
+			do
+			{
+				System.out.println("Designez le pirate jaloux numero " + (i+1) + " : ");
+				pirateJaloux2 = sc.next().charAt(0);
+				verif = equipage.relationExiste(pirateJaloux1, pirateJaloux2);
+				if(!verif)
+				{
+					equipage.ajouterRelation(pirateJaloux1, pirateJaloux2);
+				}
+				else 
+					System.out.println("La relation existe deja ! ");
+			} 
+			while(verif == true);
+		}	
+		sc.close();
+	}
+	
 	public static int askNbPirates()
 	{
-		Scanner	in = new Scanner(System.in);
+		Scanner	sc = new Scanner(System.in);
 		int		nb = 0;
 
 		do
 		{
 			System.out.print("Entrer le nombre de pirates : ");
-			nb = in.nextInt();
+			nb = sc.nextInt();
 		}
 		while (nb < 1 && nb > 26);
-		System.out.println("L'équipage est composé de " + nb + " pirates.");
+		System.out.println("L'equipage est compose de " + nb + " pirates.");
+		sc.close();
 		return (nb);
 	}
 
-	public static void menuPirate(int nbPirates) {
+	public static void menuPirate(int nbPirates, Equipage e) {
         Scanner		sc = new Scanner(System.in);
 		int			choix;
-		Equipage	e = new Equipage(nbPirates);
 		// e.ajouterRelation('A','B');
 		// e.ajouterRelation('B','C');
 		// e.ajouterRelation('B','D');
@@ -59,13 +105,14 @@ public class Main
 		do
 		{
 			System.out.println("1 ajouter une relation");
-			System.out.println("2 ajouter des préférences");
+			System.out.println("2 ajouter des preferences");
 			System.out.println("3 Fin");
 			choix = sc.nextInt();
 			switch(choix)
 			{
 				case 1:
-
+					relationPirate(e);
+					e.afficherRelations();
 					break;
 				case 2:
 
@@ -81,4 +128,5 @@ public class Main
 		while (choix != 3);
 		sc.close();
 	}
+	
 }
