@@ -53,11 +53,9 @@ public class Pirate
     }
     
     /**
-     * Methodes permettant de definir la liste des objets de preference pour un pirate
+     * Methode permettant de definir la liste des objets de preference pour un pirate
      * @param preferences est le tableau des objets de preferance du pirate 
      */
-
-
     public void ajoutPreference(int[] preferences)
     {
         for(int i=0;i<listePref.length;i++)

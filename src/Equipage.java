@@ -26,7 +26,7 @@ public class Equipage
 		matriceAdjacence = new boolean[nbPirates][nbPirates];
 		affectationTresors = new HashMap<Character,Integer>(nbPirates);
 		this.initPirates();
-		this.initMatrice();
+		// this.initMatrice();
 	}
 
 	/**
@@ -42,15 +42,15 @@ public class Equipage
 
 	/**
 	 * Initialisation de la matrice d'adjacence */
-	private void initMatrice()
-	{
-		int i;
-		int j;
+	// private void initMatrice()
+	// {
+	// 	int i;
+	// 	int j;
 
-		for (i = 0; i < nbPirates; i++)
-			for (j = 0; j < nbPirates; j++)
-				matriceAdjacence[i][j] = false;
-	}
+	// 	for (i = 0; i < nbPirates; i++)
+	// 		for (j = 0; j < nbPirates; j++)
+	// 			matriceAdjacence[i][j] = false;
+	// }
 
 	/**
 	 * Ajout d'une relation "est jaloux" entre deux pirates
@@ -81,7 +81,9 @@ public class Equipage
 		}
 	}
 
-	/* Methode de recherche de pirate, au cas où*/
+	/** Methode de recherche d'un pirate
+	 *@param nom le nom en char du pirate
+	 *@return Le pirate trouve ou null sinon*/
 	private Pirate findPirate(char nom)
 	{
 		for (Pirate p : listePirates)
@@ -107,7 +109,8 @@ public class Equipage
 	}
 
 	/**
-	 * Methode de resolution naive du problème */
+	 * Methode de resolution naive du problème
+	 *(Chaque pirate obtient sa premiere preference non deja prise) */
 	public void	solutionNaive()
 	{
 		int[]	tresorsDonnes = new int[nbPirates];
@@ -125,127 +128,15 @@ public class Equipage
 			affectationTresors.put(p.getNomPirate(),p.getListePref()[i]);
 		}
 	}
-	/**
-	 * Methode permettant de dire si deux pirates peuvent etre jaloux entre eux
-	 * @param pirate1 le premier pirate
-	 * @param pirate2 le deuxieme pirate
-	 * @return true si les deux pirates peuvent etre jaloux et false sinon
-	 */
-	public boolean rechercherJaloux(char pirate1,char pirate2)
+
+	private boolean is_contained(int[] tab, int n)
 	{
-		int i = (int)pirate1 - 'A';
-		int j = (int)pirate2 - 'A';
-
-		if (matriceAdjacence[i][j]== true && matriceAdjacence[j][i]==true)
-		{
-			return true;
-
-		}
-		else
-		{
-			return false;
-
-		}
-	}
-	
-    /**
-    * methodes permettant de rechercher l'indice de l'objet obtenu par le pirate dans sa liste d'objet de preference
-    * @param ratpi le pirate
-    * @return l'indice de l'objet obtenu dans sa liste de preference si il est present, retourne -1 sinon
-    */
-	public int rechercheIndiceObjet(char ratpi)
-	{
-		Integer objet = affectationTresors.get(ratpi);
-		int indice=-1;
-		int [] tab;
-		for (int i=0;i<listePirates.size();i++)
-		{
-			if (listePirates.get(i).getNomPirate() == ratpi)
-			{
-				tab = listePirates.get(i).getListePref();
-				for(int j=0;j<tab.length;j++)
-				{
-					if (tab[j]==objet)
-					{
-						indice=j;
-					}
-				}
-
-			}
-		}
-		return indice;
+		for (int x : tab)
+			if (x == n)
+				return (true);
+		return (false);
 	}
 
-/**
- * Methode permettant de retourner l'indice d'un objet donné dans la liste de preference d'un pirate donné
- * @param nomPirate nom du pirate
- * @param objet objet dont l'indice est a trouvé
- * @return l'indice de l'objet dans la liste de preference du pirate
- */
-	public int rechercheIndiceParapportAObjet(char nomPirate,Integer objet)
-	{
-		Pirate pirate=null;
-		int indice_objet=-1;
-		int tab[];
-		for(int i=0;i<listePirates.size();i++)
-		{
-			if (listePirates.get(i).getNomPirate()==nomPirate)
-			{
-				pirate=listePirates.get(i);
-			}
-		}
-		tab=pirate.getListePref();
-		for(int j=0;j<tab.length;j++)
-		{
-			if(tab[j]==objet)
-			{
-				indice_objet=j;
-			}
-		}
-		return indice_objet;
-	}
-
-
-    /**
-	 * Methode permettant de calculer le cout 
-	 * @return le cout
-	 */
-	public int afficherCout()
-	{
-		int cout=0;
-		for(int i=0;i<listePirates.size();i++)
-		{
-			char pirate1 =listePirates.get(i).getNomPirate();
-			Integer objet_pirate1=affectationTresors.get(pirate1);
-			for(int j=0;j<listePirates.size();j++)
-			{
-				char pirate2 =listePirates.get(j).getNomPirate();
-				Integer objet_pirate2=affectationTresors.get(pirate2);
-				if(rechercherJaloux(pirate1, pirate2)) 
-				{
-					int indice_objet_pirate1=rechercheIndiceObjet(pirate1);
-					int indice_objet_pirate2=rechercheIndiceObjet(pirate2);
-					int indice_objetDePirate2_dansPirate1=rechercheIndiceParapportAObjet(pirate1,objet_pirate2 );
-					int indice_objetDePirate1_dansPirate2=rechercheIndiceParapportAObjet(pirate2,objet_pirate1 );
-					if ( indice_objetDePirate1_dansPirate2<indice_objet_pirate2 || indice_objetDePirate2_dansPirate1<indice_objet_pirate1)
-					{
-						cout=cout+1;
-					}
-				}
-
-			}
-		}
-		return cout;
-	}
-
-	// private boolean is_contained(int[] tab, int n)
-	// {
-	// 	for (int x : tab)
-	// 		if (x == n)
-	// 			return (true);
-	// 	return (false);
-	// }
-	//
 
 	/**
 	 * Methode pour afficher la solution actuelle de l'équipage */
@@ -260,18 +151,75 @@ public class Equipage
 			System.out.println(nom + " : " + affectationTresors.get(nom));
 	}
 
-	// private int	calculCout()
-	// {
-	// 	for (Pirate p : listePirates)
-	// 	{
+	/**
+	 * Methode de calcul du cout total de la solution actuelle
+	 *@return */
+	private int	calculCout()
+	{
+		int	count; //le cout total
+		int	i;
+		int	j;
+		boolean[] already_counted = new boolean[nbPirates]; //pour ne compter qu'une fois chaque pirate
+		Pirate	p1; //pirate compare 1
+		Pirate	p2; //pirate compare 2
+		int		t1; //tresor du pirate 1
+		int		t2; //tresor du pirate 2
+		int		indiceTP1P1; //indice du tresor de p1 dans les preferences de p1
+		int		indiceTP1P2; //indice du tresor de p1 dans les preferences de p2
+		int		indiceTP2P1; //indice du tresor de p2 dans les preferences de p1
+		int		indiceTP2P2; //indice du tresor de p2 dans les preferences de p2
 
-	// 	}
-	// }
+		count = 0;
+		for (i = 0; i < matriceAdjacence.length; i++)
+		{
+			for (j = 0; j < matriceAdjacence.length; j++)
+			{
+				/* Si les deux pirates ont une relation de jalousie */
+				if (i != j && matriceAdjacence[i][j])
+				{
+					p1 = listePirates.get(i);
+					p2 = listePirates.get(j);
+					t1 = affectationTresors.get(p1.getNomPirate());
+					t2 = affectationTresors.get(p2.getNomPirate());
+					indiceTP1P1 = find_index(p1.getListePref(),t1);
+					indiceTP1P2 = find_index(p2.getListePref(),t1);
+					indiceTP2P1 = find_index(p1.getListePref(),t2);
+					indiceTP2P2 = find_index(p2.getListePref(),t2);
+					/* Si p1 et p2 ont un tresor correspondant a une preference differente
+					 * Et que p1 n'a pas encore ete compte */
+					if (indiceTP1P1 != indiceTP2P2 && !already_counted[p1.getNomPirate() - 'A'])
+						/* Si p2 a un tresor que p1 aurait prefere */
+						if (indiceTP1P1 >= indiceTP2P1)
+						{
+							System.out.println("jalousie entre " + p1.getNomPirate() + " et " + p2.getNomPirate());
+							already_counted[p1.getNomPirate() - 'A'] = true;
+							count++;
+						}
+				}
+			}
+		}
+		return (count);
+	}
 
-	// public void afficherCout()
-	// {
+	/**
+	 * Methode privee permettant de trouver le premier index d'un nombre donne dans un tableau
+	 *@param tab le tableau dans lequel rechercher
+	 *@param nb le nombre a chercher
+	 *@return l'index du nombre dans le tableau ou -1 s'il n'est pas dedans*/
+	private int find_index(int[] tab, int nb)
+	{
+		for (int i = 0; i < tab.length; i++)
+			if (tab[i] == nb)
+				return (i);
+		return (-1);
+	}
 
-	// }
+	/**
+	 * Methode permettant d'afficher le cout de la solution actuelle */
+	public void afficherCout()
+	{
+		System.out.println("La solution actuelle a un cout de " + calculCout());
+	}
 	
 	/**
 	 * Affichage de la matrice d'adjacence (principalement pour les tests) */
@@ -292,11 +240,9 @@ public class Equipage
 		}
 	}
 
-	public List<Pirate> getListePirate()
-	{
-		return listePirates;
-	}
-
+	/** Methode de verification qu'un pirate existe dans l'equipage
+	 *@param nom le nom recherche
+	 *@return true s'il existe, false sinon*/
 	public boolean containList(char nom)
 	{
 		ArrayList<Character> listNom;
@@ -310,15 +256,30 @@ public class Equipage
 		return false;
 	}
 
-	public boolean[][] getMatriceAdjacence()
-	{
-		return matriceAdjacence;
-	}
-
+	/** Methode de verification qu'une relation de jalousie existe deja entre
+	 *deux pirates
+	 *@param pirate1 le premier pirate du couple a tester
+	 *@param pirate2 le seconde pirate du couple a tester
+	 *@return true si la relation existe, false sinon*/
 	public boolean relationExiste(char pirate1, char pirate2)
 	{
 		int i = pirate1 - 'A';
 		int j = pirate2 - 'A';
 		return matriceAdjacence[i][j];
+	}
+
+
+	/** Getter pour la liste des pirates
+	 *@return */
+	public List<Pirate> getListePirate()
+	{
+		return listePirates;
+	}
+
+	/** Getter pour la matrice d'adjacence
+	 *@return */
+	public boolean[][] getMatriceAdjacence()
+	{
+		return matriceAdjacence;
 	}
 }
