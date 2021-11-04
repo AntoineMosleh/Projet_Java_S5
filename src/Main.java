@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import javax.naming.LimitExceededException;
 
 public class Main
 {
@@ -43,16 +47,21 @@ public class Main
 		for (int i=0; i<nombrePirate; i++)
 		{	
 			do
-			{
+			{	
 				System.out.println("Designez le pirate jaloux numero " + (i+1) + " : ");
 				pirateJaloux2 = sc.next().charAt(0);
-				verif = equipage.relationExiste(pirateJaloux1, pirateJaloux2);
-				if(!verif)
+				if(pirateJaloux1!=pirateJaloux2)
 				{
-					equipage.ajouterRelation(pirateJaloux1, pirateJaloux2);
+					verif = equipage.relationExiste(pirateJaloux1, pirateJaloux2);
+					if(!verif)
+					{
+						equipage.ajouterRelation(pirateJaloux1, pirateJaloux2);
+					}
+					else 
+						System.out.println("La relation existe deja ! ");
 				}
-				else 
-					System.out.println("La relation existe deja ! ");
+				else
+					System.out.println("Le pirate ne peut être jaloux de lui meme ! ");
 			} 
 			while(verif == true);
 		}	
@@ -62,29 +71,39 @@ public class Main
 
 	public static void preferencePirate(Equipage equipage, Scanner sc,int nombreDePirates)
 	{		
-		System.out.println("je suis rentré ");
 		//Scanner 		sc = new Scanner(System.in).useDelimiter("\s+");
-		sc.useDelimiter("\s+");
-		char 			nom;
-		int[]			pref = new int[nombreDePirates];
-		int 			i=0;
-		int 			nombre;
+		//sc.useDelimiter("\s+");
+		char 					nom;
+		int[]					pref = new int[nombreDePirates]; // Considerons qu'il n'y ait pas autant d'objets que de pirates
+		int 					nombre;
 
-		System.out.println("Veuillez entrer le nom du pirate suivi de sa liste de preference : ");
+		System.out.println("Veuillez entrer le nom du pirate");
 		nom = sc.next().charAt(0);
-		while (sc.hasNext())
+		System.out.println("Veuillez entrer la liste de preference contenant " + nombreDePirates + " separe par des espaces : ");
+		for (int i=0; i<nombreDePirates; i++)
 		{
-			if(sc.hasNextInt())
-			{	
-				nombre = sc.nextInt();
-				pref[i]=nombre;
-			}
-			else
-				sc.next();
-			i++;
+			nombre = sc.nextInt();
+			pref[i] = nombre;
 		}
+
 		equipage.ajoutPreferencePirate(nom, pref);
-		//sc.close();
+
+		/*char nomlist;
+		List<Pirate> list = new ArrayList<>();
+		int[] listpref = new int[nombreDePirates];
+		list = equipage.getListePirate();
+		for(int k=0; k<list.size(); k++)
+		{
+			nomlist = list.get(k).getNomPirate();
+			if (nom == nomlist)
+			{	
+				listpref = list.get(k).getListePref();
+				for (int m=0; m<listpref.length; m++)
+				{
+					System.out.print(listpref[m]+" ");
+				}
+			}
+		}*/
 	}
 
 
@@ -104,13 +123,14 @@ public class Main
 	{
 		//Scanner	sc = new Scanner(System.in);
 		int		nb;
-
 		do
-		{
+		{	
 			System.out.print("Entrer le nombre de pirates : ");
 			nb = sc.nextInt();
+			if (nb < 0 || nb >26)
+				System.out.println("Le nombre de pirate composant l'equipage ne peut etre negatif ou exceder 26 ");
 		}
-		while (nb < 1 && nb > 26);
+		while (nb < 0 || nb >26);
 		System.out.println("L'equipage est compose de " + nb + " pirates.");
 		//sc.close();
 		return (nb);
@@ -158,7 +178,7 @@ public class Main
 					e.afficherRelations();
 					break;
 				case 2:
-				    preferencePirate(e, sc,nbPirates);					
+				    preferencePirate(e, sc, nbPirates);					
 					break;
 				case 3:
 					System.out.println("Au revoir !");
