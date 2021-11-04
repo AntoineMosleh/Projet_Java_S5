@@ -1,4 +1,5 @@
 import java.lang.module.FindException;
+import java.util.List;
 import java.util.Scanner;
 public class Main 
 {
@@ -24,11 +25,11 @@ public class Main
             {
                 System.out.print("Veuillez entrer le nombres de pirates :) \n");
                  nombrePirates=sc.nextInt();
-                if(nombrePirates<0 || nombrePirates>26)
+                if(nombrePirates<=0 || nombrePirates>26)
                 {
-                    System.out.println("Le nombres de pirates ne peut etre negative ou exceder 26");
+                    System.out.println("Le nombres de pirates ne peut etre negative,nul ou exceder 26");
                 }
-            }while(nombrePirates<0 || nombrePirates>26);
+            }while(nombrePirates<=0 || nombrePirates>26);
             System.out.println("L'equipage est composé de "+nombrePirates+" pirates !");
             return nombrePirates;
         }
@@ -50,7 +51,8 @@ public class Main
             boolean verif2=false;
             boolean verif3=false;
             int nombrePiratesJaloux;
-            System.out.println("Veuillez saisir les differentes relations entre les pirates :");
+            int i=0;
+            System.out.println("Nous allons proceder a la saisie des differentes relations entre les pirates :");
             
             do //demande quel pirate est jaloux
             {
@@ -62,13 +64,16 @@ public class Main
                 {
                     System.out.println("le pirate : "+pirateJaloux1+" n'existe pas ");
                 }
-                System.out.println("Vous avez choisis le pirate: "+ pirateJaloux1);
+                else
+                {
+                    System.out.println("Vous avez choisis le pirate: "+ pirateJaloux1);
+                }
 
             }while(verif1==false);
 
             do //demande avec combien de pirates est il jaloux
             {
-                System.out.println("Avec combien de pirates est-il jaloux ? ");
+                System.out.println("De combien de pirates est-il jaloux ? ");
                 nombrePiratesJaloux =sc.nextInt();
                 if (nombrePiratesJaloux<= nbPirates-1)
                 {
@@ -82,7 +87,7 @@ public class Main
             }while(verif2==false);
             System.out.println("Veuillez saisir les pirates que "+pirateJaloux1+" n'aime pas :");
 
-            for (int i=0;i<nombrePiratesJaloux;i++)//demande les pirates dont le piratJaloux1 est jaloux
+            while(i<nombrePiratesJaloux)//demande les pirates dont le piratJaloux1 est jaloux
             {
                 do
                 {
@@ -95,18 +100,19 @@ public class Main
                         if(verif3==false)
                         {
                             e.ajouterRelation(pirateJaloux1, pirateJaloux2);
+                            i++;
 
                         }
                         else
                         {
                             System.out.println("La relation existe deja ! ");
-                            i--; 
+                            
                         }
                     }
                     else
                     {
                         System.out.println("Le pirate ne peut être jaloux de lui meme ! ");
-                        i--;
+                        
 
                     }
 
@@ -129,7 +135,7 @@ public class Main
             Boolean verif=false;
             Boolean verif2=false;
             Pirate pirate;
-            System.out.println("Nous allons maintenant proceder a l'ajout des preference des pirates :)");
+            System.out.println("Nous allons maintenant proceder a l'ajout des preferences pour les pirates :)");
             do
             {
                 System.out.println("Veuillez entrer le nom du pirate :");
@@ -168,15 +174,30 @@ public class Main
             {
                 System.out.print(tabTest[j] + " ");
             }
+            System.out.print("\n");
 
         }
-
+        /**
+         * Methode permettant de mettre fin au premier menu si la liste de preference de tout les membres de l'equipage est rempli
+         * @param e represante l'equipage
+         * @return true si le premier menu peut prendre fin,false si non
+         */
         public static boolean finPremierMenu(Equipage e)
         {
-            boolean verification=false;
-            
+            boolean verificationFinal=true;
+            boolean verification;
+            List<Pirate> membresdEquipage;
+            membresdEquipage=e.getListePirate();
+            for(int i=0;i<membresdEquipage.size();i++)
+            {
+                verification=membresdEquipage.get(i).listIsVide();
+                if(verification==true)
+                {
+                    verificationFinal=false;
+                }
 
-
+            }
+            return verificationFinal;
         }
 
 
@@ -189,20 +210,26 @@ public class Main
             {
                 System.out.println("1 ajouter une relation");
 			    System.out.println("2 ajouter des preferences");
-			    System.out.println("3 Fin");
+			    System.out.println("3 Fin \n");
+                System.out.println("Que souhaitez vous faire ?");
+
 
                 choix =sc.nextInt();
                 switch(choix)
                 {
                     case 1:
                         ajoutDesRelations(sc, e,nombresDePirates);
-                        e.afficherRelations();
+                        //e.afficherRelations();
                         break;
                     case 2:
                         ajoutDesPreference(sc, e, nombresDePirates);
                         break;
                     case 3:
-                        finPremierMenu();
+                        verification=finPremierMenu(e);
+                        if(verification==false)
+                        {
+                            System.out.println(" \n Les pirates ne possedent pas tous une liste de preference \n");
+                        }
                         break;
                     default:
                         System.out.println("Le choix " + choix + " n'existe pas.");
@@ -213,9 +240,5 @@ public class Main
             }while (verification==false);
         }
 
-
-
-
-
-        
+    
     }
