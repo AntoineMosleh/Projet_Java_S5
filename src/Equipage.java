@@ -84,7 +84,7 @@ public class Equipage
 	/** Methode de recherche d'un pirate
 	 *@param nom le nom en char du pirate
 	 *@return Le pirate trouve ou null sinon*/
-	private Pirate findPirate(char nom)
+	public Pirate findPirate(char nom) // je l'ai remise en public
 	{
 		for (Pirate p : listePirates)
 			if (p.getNomPirate() == nom)

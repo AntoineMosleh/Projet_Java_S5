@@ -61,4 +61,21 @@ public class Pirate
         for(int i=0;i<listePref.length;i++)
             listePref[i]=preferences[i];
     }
+
+    /**
+     * Methode permettant de savoir si la liste de preference d'un pirate est vide ou non
+     * @return retourne true si la liste est vide et false si elle n'est pas vide
+     */
+    public Boolean listIsVide()
+    {
+        Boolean estVide=true;
+        for(int i=0;i<listePref.length;i++)
+        {
+            if(listePref[i]!=0)
+            {
+                estVide=false;
+            }
+        }
+        return estVide;
+    }
 }
