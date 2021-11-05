@@ -22,13 +22,14 @@ public class Main
             do
             {
                 System.out.print("Veuillez entrer le nombres de pirates :) \n");
-                 nombrePirates=sc.nextInt();
+                nombrePirates=sc.nextInt();
                 if(nombrePirates<=0 || nombrePirates>26)
                 {
                     System.out.println("Le nombres de pirates ne peut etre negative,nul ou exceder 26");
                 }
             }while(nombrePirates<=0 || nombrePirates>26);
-            System.out.println("L'equipage est composé de "+nombrePirates+" pirates !");
+            System.out.println("L'equipage est compose de "+nombrePirates+" pirates !");
+            sc.nextLine();
             return nombrePirates;
         }
 
@@ -51,12 +52,12 @@ public class Main
             int nombrePiratesJaloux;
             int i=0;
             System.out.println("Nous allons proceder a la saisie des differentes relations entre les pirates :");
-            
+            System.out.println(e.compoEquipage());         
             do //demande quel pirate est jaloux
             {
                 System.out.println("Saisissez quel pirate est jaloux :");
                 str = sc.nextLine();
-                pirateJaloux1 = sc.next().charAt(0);
+                pirateJaloux1 = str.charAt(0);
                 verif1 = e.containList(pirateJaloux1);
                 if (verif1==false)
                 {
@@ -73,6 +74,7 @@ public class Main
             {
                 System.out.println("De combien de pirates est-il jaloux ? ");
                 nombrePiratesJaloux =sc.nextInt();
+                sc.nextLine();
                 if (nombrePiratesJaloux<= nbPirates-1)
                 {
                     verif2 = true;
@@ -91,7 +93,7 @@ public class Main
                 {
                     System.out.println("Designez le pirate jaloux numero "+ (i+1) + " : ");
                     str2 = sc.nextLine();
-                    pirateJaloux2= sc.next().charAt(0);
+                    pirateJaloux2= str2.charAt(0);
                     if (pirateJaloux2 != pirateJaloux1 )
                     {
                         verif3= e.relationExiste(pirateJaloux1, pirateJaloux2);
@@ -109,13 +111,14 @@ public class Main
                     }
                     else
                     {
-                        System.out.println("Le pirate ne peut être jaloux de lui meme ! ");
+                        System.out.println("Le pirate ne peut etre jaloux de lui meme ! ");
                         
 
                     }
 
                 }while(verif3==true);
             }
+            e.afficherRelations();
 
         }
         /**
@@ -128,17 +131,19 @@ public class Main
         {
             int[] listeDePreference = new int[nbPirates];
             String str;
+            String line;
             char nomPirate;
             int objet;
             Boolean verif=false;
             Boolean verif2=false;
             Pirate pirate;
             System.out.println("Nous allons maintenant proceder a l'ajout des preferences pour les pirates :)");
+            System.out.println(e.compoEquipage()); 
             do
             {
                 System.out.println("Veuillez entrer le nom du pirate :");
                 str =sc.nextLine();
-                nomPirate = sc.next().charAt(0);
+                nomPirate = str.charAt(0);
                 verif=e.containList(nomPirate);
                 if (verif==false)
                 {
@@ -152,11 +157,28 @@ public class Main
                 if(verif2==true)
                 {
                     System.out.println("Veuillez maintenant saisir la liste de preference de "+ nomPirate +" contenant "+nbPirates+" objets separe par des espaces");
+                    //System.out.println(line);
                     for (int i=0; i<nbPirates; i++)
                     {
-                        objet = sc.nextInt();
-                        listeDePreference[i] = objet;
+                        objet =sc.nextInt(); //line.charAt(i*2)- '0';
+                        if ( objet<= nbPirates && objet>0)
+                        {
+                            listeDePreference[i] = objet;
+                        }
+                        else
+                        {
+                            System.out.println("L'objet "+objet+" est incorrect");
+                            System.out.println("Veuillez maintenant saisir la liste de preference de "+ nomPirate +" contenant "+nbPirates+" objets separe par des espaces");
+
+                            i--;
+
+                        }
                     }
+                    sc.nextLine();
+                    /*while(sc.hasNext())
+                    {
+                        sc.nextLine();
+                    }*/
                     e.ajoutPreferencePirate(nomPirate, listeDePreference);
                 }
                 else
@@ -172,7 +194,7 @@ public class Main
             {
                 System.out.print(tabTest[j] + " ");
             }
-            System.out.print("\n");
+            System.out.println("\n");
 
         }
 
@@ -215,6 +237,7 @@ public class Main
                 System.out.println("Que souhaitez vous faire ?");
 
                 choix =sc.nextInt();
+                sc.nextLine();
                 switch(choix)
                 {
                     case 1:

@@ -277,11 +277,25 @@ public class Equipage
 	{
 		return matriceAdjacence;
 	}
+    /**
+	 * Methode permettant d'afficher les noms des membres de l'equipage
+	 * @return 
+	 */
+	public String compoEquipage()
+	{
+		StringBuffer st = new StringBuffer("Les membres de l'equipage sont : \n");
+		for(Pirate p : listePirates)
+		{
+			st.append(p.getNomPirate());
+			st.append(" ");
+		}
+		return st.toString();
+	}
 
 	@Override
 	public String toString()
 	{
-		StringBuffer	s = new StringBuffer("Composition de l'equipage et leurs preferences respectives : ");
+		StringBuffer	s = new StringBuffer("Composition de l'equipage et leurs preferences respectives : \n");
 
 		for (Pirate p : listePirates)
 			s.append(p.toString()).append("\n");
