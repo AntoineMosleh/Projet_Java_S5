@@ -282,4 +282,14 @@ public class Equipage
 	{
 		return matriceAdjacence;
 	}
+
+	@Override
+	public String toString()
+	{
+		StringBuffer	s = new StringBuffer("Composition de l'equipage et leurs preferences respectives : ");
+
+		for (Pirate p : listePirates)
+			s.append(p.toString()).append("\n");
+		return (s.toString());
+	}
 }

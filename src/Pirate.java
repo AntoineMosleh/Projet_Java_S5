@@ -78,4 +78,17 @@ public class Pirate
         }
         return estVide;
     }
+
+    @Override
+    public String toString()
+    {
+        int             i;
+        StringBuffer    s = new StringBuffer(nomPirate);
+
+        s.append(" : ");
+        for (i = 0; i < listePref.length - 1; i++)
+            s.append(listePref[i]).append(" ");
+        s.append(listePref[i]);
+        return (s.toString());
+    }
 }
