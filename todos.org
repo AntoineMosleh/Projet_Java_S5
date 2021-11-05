@@ -1,12 +1,12 @@
 #+TITLE: Todos
 
 * TODO RENDU 1 : Programme de gestion d'équipage
-** DONE Classe pirate => Antoine
+** DONE Classe pirate
 *** DONE attribut nom
 *** DONE attribut liste de préférences (vide au début)
 *** DONE constructeur avec nom
 *** DONE méthode ajouter préférences
-** TODO Classe equipage => Bastien (-> juste debut classe + 1ere methode)
+** DONE Classe equipage
 *** DONE attribut nb pirates
 *** DONE attribut liste de pirates
 *** DONE attribut matrice adjacence
@@ -17,15 +17,15 @@
 *** DONE méthode solution naïve
 *** DONE méthode affichage solution actuelle
 *** DONE méthode affichage du coût
-** TODO Main
+** DONE Main
 *** DONE Demander à l'utilisateur le nb de pirates ([1;26])
-*** TODO Menu permettant les actions
-**** TODO Ajouter une relation
-**** TODO Ajouter des préférences
-**** TODO Fin
-*** TODO Menu présenté après la configuration de l'équipage :
-**** TODO Proposer solution naïve
-**** TODO Échanger objets (échange les objets de deux pirates)
-**** TODO Afficher coût (solution actuelle)
-**** TODO Fin
+*** DONE Menu permettant les actions
+**** DONE Ajouter une relation
+**** DONE Ajouter des préférences
+**** DONE Fin
+*** DONE Menu présenté après la configuration de l'équipage :
+**** DONE Proposer solution naïve
+**** DONE Échanger objets (échange les objets de deux pirates)
+**** DONE Afficher coût (solution actuelle)
+**** DONE Fin
 ** TODO Rendre projet

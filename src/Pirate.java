@@ -1,5 +1,5 @@
 /**
- * Classe permettant de representer un Pirate
+ * Classe de représentation d'un Pirate
  * 
  *
  */
@@ -10,8 +10,8 @@ public class Pirate
     private int[] listePref; // represente la liste des objets préferés de chaque pirate.
 
     /**
-     * Constructeur permettant d'initialiser le tableau des objets de preferance pour chaque pirates
-     * @param nm le nom du pirate
+     * Constructeur permettant d'initialiser le tableau des préférences pour chaque pirates
+     * @param np le nom du pirate
      * @param nbPirate le nombre de pirates qui sera egale au nombres d'objets pour chaque pirates
      */
 
@@ -23,10 +23,9 @@ public class Pirate
     }
 
     /**
-     * Methode permettant de recuperer le nom du pirate
+     * Méthode permettant de récupérer le nom du pirate
      * @return le nom du pirate
      */
-
     public char  getNomPirate()
     {
         return this.nomPirate;
@@ -36,24 +35,22 @@ public class Pirate
      * Permet de changer le nom du pirate
      * @param nomPirate le nom du pirate a ajouter
      */
-
     public void setNomPirate(char nomPirate)
     {
         this.nomPirate=nomPirate;
     }
 
     /**
-     * permet de recuperer la liste de preferance des objets d'un pirate
+     * permet de récupérer la liste de préférences des objets d'un pirate
      * @return la liste de reference
      */
-
     public int[] getListePref()
     {
         return this.listePref;
     }
     
     /**
-     * Methode permettant de definir la liste des objets de preference pour un pirate
+     * Méthode permettant de définir la liste des préférences d'objets pour un pirate
      * @param preferences est le tableau des objets de preferance du pirate 
      */
     public void ajoutPreference(int[] preferences)
@@ -63,7 +60,7 @@ public class Pirate
     }
 
     /**
-     * Methode permettant de savoir si la liste de preference d'un pirate est vide ou non
+     * Methode permettant de savoir si la liste de préférences d'un pirate est vide ou non
      * @return retourne true si la liste est vide et false si elle n'est pas vide
      */
     public Boolean listIsVide()

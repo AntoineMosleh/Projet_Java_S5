@@ -8,16 +8,13 @@ public class Main
         Scanner sc = new Scanner(System.in);
         int nbPirates=creationEquipage(sc);
         Equipage equipage = new Equipage(nbPirates);
-        //ajoutDesRelations(sc, equipage,nbPirates);
-        //ajoutDesPreference(sc, equipage, nbPirates);
         menu1(sc, equipage, nbPirates);
         menu2(sc, equipage);
         sc.close();
     }
         
         /**
-         * Methode demandant à l'utilisateur le nombres de pirates,permettant la creation de l'equipage
-         * 
+         * Méthode demandant à l'utilisateur le nombre de pirates de l'équipage
          */
         public static int creationEquipage(Scanner sc)
         {
@@ -37,10 +34,10 @@ public class Main
 
 
         /**
-         * Methode permettant de rajouter une realtion "ne s'aime pas" entre les pirates
+         * Méthode permettant de rajouter une realtion "ne s'aime pas" entre les pirates
          * @param sc Scanner permettant la saisie
          * @param e represente l'equipage
-         * @param nbPirates represente le nombres de pirates
+         * @param nbPirates représente le nombres de pirates
          */
         public static void ajoutDesRelations(Scanner sc,Equipage e,int nbPirates)
         {
@@ -122,10 +119,10 @@ public class Main
 
         }
         /**
-         * Methode permettant de saisir la liste de preference d'un pirate
+         * Méthode permettant de saisir la liste de préférence d'un pirate
          * @param sc Scanner permettant la saisie
          * @param e represente l'equipage
-         * @param nbPirates represente le nombres d'objet a saisir dans la liste de preference
+         * @param nbPirates représente le nombre d'objets à saisir dans la liste de préférences
          */
         public static void ajoutDesPreference(Scanner sc,Equipage e,int nbPirates)
         {
@@ -180,7 +177,7 @@ public class Main
         }
 
         /**
-         * Methode permettant de mettre fin au premier menu si la liste de preference de tout les membres de l'equipage est rempli
+         * Méthode permettant de mettre fin au premier menu si la liste de préférences de tous les membres de l'equipage est remplie
          * @param e represante l'equipage
          * @return true si le premier menu peut prendre fin,false si non
          */
@@ -202,10 +199,10 @@ public class Main
         }
 
         /**
-        * Methode permettant d'afficher et de gerer le premier menu
+        * Méthode permettant d'afficher et de gérer le premier menu
         *@param sc le scanner du menu principal
-        *@param e l'equipage a parametrer
-        *@param nombreDePirate le nombre de pirates*/
+        *@param e l'équipage a paramétrer
+        *@param nombreDePirates le nombre de pirates*/
         public static void menu1(Scanner sc,Equipage e,int nombreDePirates)
         {
             int choix;
@@ -243,9 +240,9 @@ public class Main
         }
 
     /**
-     * Methode affichant et gerant le deuxieme menu, apres que l'equipage
-     * ait ete parametre
-     *@param e l'equipage deja parametre
+     * Méthode affichant et gérant le deuxieme menu, après que l'equipage
+     * ait ete paramétré
+     *@param e l'equipage déjà paramétré
      *@param sc le scanner du menu principal
      */
     private static void menu2(Scanner sc, Equipage e)
@@ -281,8 +278,8 @@ public class Main
 	}
 
     /**
-     * Methode intermediare du menu2 permettant l'echange des objets de deux pirate
-     *@param equipage l'equipage dans lequel effectuer l'echange
+     * Méthode intermediare du menu2 permettant l'échange des objets de deux pirates
+     *@param équipage l'equipage dans lequel effectuer l'échange
      *@param sc le scanner du menu principal
      */
 	private static void pirateEchange(Equipage equipage, Scanner sc)

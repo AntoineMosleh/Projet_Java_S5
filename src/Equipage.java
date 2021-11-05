@@ -41,18 +41,6 @@ public class Equipage
 	}
 
 	/**
-	 * Initialisation de la matrice d'adjacence */
-	// private void initMatrice()
-	// {
-	// 	int i;
-	// 	int j;
-
-	// 	for (i = 0; i < nbPirates; i++)
-	// 		for (j = 0; j < nbPirates; j++)
-	// 			matriceAdjacence[i][j] = false;
-	// }
-
-	/**
 	 * Ajout d'une relation "est jaloux" entre deux pirates
 	 *@param p1 le nom du premier pirate
 	 *@param p2 le nom du deuxième pirate
@@ -66,9 +54,9 @@ public class Equipage
 	}
 
 	/**
-	 * Ajout d'une liste d'objet de preference pour un pirate donné
+	 * Ajout d'une liste de préférences pour un pirate donné
 	 * @param nomP le nom du pirate concerné
-	 * @param pref liste d'objet de preferences
+	 * @param pref liste de préférences
 	 */
 	public void ajoutPreferencePirate(char nomP,int[] pref)
 	{
@@ -81,10 +69,10 @@ public class Equipage
 		}
 	}
 
-	/** Methode de recherche d'un pirate
+	/** Méthode de recherche d'un pirate
 	 *@param nom le nom en char du pirate
-	 *@return Le pirate trouve ou null sinon*/
-	public Pirate findPirate(char nom) // je l'ai remise en public
+	 *@return Le pirate trouvé ou null sinon*/
+	public Pirate findPirate(char nom)
 	{
 		for (Pirate p : listePirates)
 			if (p.getNomPirate() == nom)
@@ -93,9 +81,9 @@ public class Equipage
 	}
 
 	/**
-	 * Echange d'objets entre 2 pirates donné en parametre
+	 * Échange d'un objet entre 2 pirates
 	 * @param pirate1 nom du premier pirate
-	 * @param pirate2 nom du deuxieme pirate
+	 * @param pirate2 nom du deuxième pirate
 	 */
 	public void echangeObjet(char pirate1,char pirate2)
 	{
@@ -109,7 +97,7 @@ public class Equipage
 	}
 
 	/**
-	 * Methode de resolution naive du problème
+	 * Méthode de résolution naïve du problème
 	 *(Chaque pirate obtient sa premiere preference non deja prise) */
 	public void	solutionNaive()
 	{
@@ -129,6 +117,10 @@ public class Equipage
 		}
 	}
 
+	/**
+	 * Méthode privée permettant de savoir si un nombre est contenu dans un tableau
+	 *@param tab le tableau dans lequel vérifier
+	 *@param n le nombre à chercher*/
 	private boolean is_contained(int[] tab, int n)
 	{
 		for (int x : tab)
@@ -139,20 +131,23 @@ public class Equipage
 
 
 	/**
-	 * Methode pour afficher la solution actuelle de l'équipage */
+	 * Méthode pour afficher la solution actuelle de l'équipage */
 	public void afficherSolution()
 	{
 		char	nom = 'A';
 
 		if (affectationTresors.isEmpty())
-			return;
-		System.out.println("Solution actuelle : ");
-		for (nom = 'A'; nom - 'A' < nbPirates; nom++)
-			System.out.println(nom + " : " + affectationTresors.get(nom));
+			System.out.println("Pas encore de solution pour l'equipage.");
+		else
+		{
+			System.out.println("Solution actuelle : ");
+			for (nom = 'A'; nom - 'A' < nbPirates; nom++)
+				System.out.println(nom + " : " + affectationTresors.get(nom));
+		}
 	}
 
 	/**
-	 * Methode de calcul du cout total de la solution actuelle
+	 * Méthode de calcul du cout total de la solution actuelle
 	 *@return */
 	private int	calculCout()
 	{
@@ -202,7 +197,7 @@ public class Equipage
 	}
 
 	/**
-	 * Methode privee permettant de trouver le premier index d'un nombre donne dans un tableau
+	 * Méthode privée permettant de trouver le premier index d'un nombre donne dans un tableau
 	 *@param tab le tableau dans lequel rechercher
 	 *@param nb le nombre a chercher
 	 *@return l'index du nombre dans le tableau ou -1 s'il n'est pas dedans*/
@@ -215,7 +210,7 @@ public class Equipage
 	}
 
 	/**
-	 * Methode permettant d'afficher le cout de la solution actuelle */
+	 * Méthode permettant d'afficher le coût de la solution actuelle */
 	public void afficherCout()
 	{
 		System.out.println("La solution actuelle a un cout de " + calculCout());
@@ -240,7 +235,7 @@ public class Equipage
 		}
 	}
 
-	/** Methode de verification qu'un pirate existe dans l'equipage
+	/** Méthode de vérification qu'un pirate existe dans l'equipage
 	 *@param nom le nom recherche
 	 *@return true s'il existe, false sinon*/
 	public boolean containList(char nom)
@@ -256,7 +251,7 @@ public class Equipage
 		return false;
 	}
 
-	/** Methode de verification qu'une relation de jalousie existe deja entre
+	/** Méthode de vérification qu'une relation de jalousie existe déjà entre
 	 *deux pirates
 	 *@param pirate1 le premier pirate du couple a tester
 	 *@param pirate2 le seconde pirate du couple a tester
