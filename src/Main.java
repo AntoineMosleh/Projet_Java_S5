@@ -1,6 +1,6 @@
-import java.lang.module.FindException;
 import java.util.List;
 import java.util.Scanner;
+
 public class Main 
 {
     public static void main(String[] args)
@@ -10,7 +10,8 @@ public class Main
         Equipage equipage = new Equipage(nbPirates);
         //ajoutDesRelations(sc, equipage,nbPirates);
         //ajoutDesPreference(sc, equipage, nbPirates);
-        menu(sc, equipage, nbPirates);
+        menu1(sc, equipage, nbPirates);
+        menu2(sc, equipage);
         sc.close();
     }
         
@@ -177,6 +178,7 @@ public class Main
             System.out.print("\n");
 
         }
+
         /**
          * Methode permettant de mettre fin au premier menu si la liste de preference de tout les membres de l'equipage est rempli
          * @param e represante l'equipage
@@ -195,14 +197,16 @@ public class Main
                 {
                     verificationFinal=false;
                 }
-
             }
             return verificationFinal;
         }
 
-
-
-        public static void menu(Scanner sc,Equipage e,int nombresDePirates)
+        /**
+        * Methode permettant d'afficher et de gerer le premier menu
+        *@param sc le scanner du menu principal
+        *@param e l'equipage a parametrer
+        *@param nombreDePirate le nombre de pirates*/
+        public static void menu1(Scanner sc,Equipage e,int nombreDePirates)
         {
             int choix;
             boolean verification=false;
@@ -213,16 +217,15 @@ public class Main
 			    System.out.println("3 Fin \n");
                 System.out.println("Que souhaitez vous faire ?");
 
-
                 choix =sc.nextInt();
                 switch(choix)
                 {
                     case 1:
-                        ajoutDesRelations(sc, e,nombresDePirates);
+                        ajoutDesRelations(sc, e,nombreDePirates);
                         //e.afficherRelations();
                         break;
                     case 2:
-                        ajoutDesPreference(sc, e, nombresDePirates);
+                        ajoutDesPreference(sc, e, nombreDePirates);
                         break;
                     case 3:
                         verification=finPremierMenu(e);
@@ -236,9 +239,68 @@ public class Main
                         break;
                 }
 
-
             }while (verification==false);
         }
 
-    
-    }
+    /**
+     * Methode affichant et gerant le deuxieme menu, apres que l'equipage
+     * ait ete parametre
+     *@param e l'equipage deja parametre
+     *@param sc le scanner du menu principal
+     */
+    private static void menu2(Scanner sc, Equipage e)
+	{
+		int			choix;
+
+        e.solutionNaive();
+		do
+		{
+            e.afficherSolution();
+            System.out.println();
+			System.out.println("1 echanger objet");
+			System.out.println("2 afficher le cout");
+			System.out.println("3 Fin");
+			choix = sc.nextInt();
+			switch(choix)
+			{
+				case 1:
+					pirateEchange(e, sc);
+					break;
+				case 2:
+                    e.afficherCout();
+					break;
+				case 3:
+                    System.out.println("Au revoir.");
+					break;
+				default:
+					System.out.println("Le choix " + choix + " n'existe pas.");
+					break;
+			}
+		}
+		while (choix != 3);
+	}
+
+    /**
+     * Methode intermediare du menu2 permettant l'echange des objets de deux pirate
+     *@param equipage l'equipage dans lequel effectuer l'echange
+     *@param sc le scanner du menu principal
+     */
+	private static void pirateEchange(Equipage equipage, Scanner sc)
+	{
+		char    pirate1;
+		char    pirate2;
+        boolean verif;
+
+        do
+        {
+            System.out.println("Echange des objets entre deux pirates.");
+            System.out.print("Premier pirate pour l'echange : ");
+            pirate1 = sc.next().charAt(0);
+            System.out.println("Second pirate pour l'echange : ");
+            pirate2 = sc.next().charAt(0);
+            verif = equipage.containList(pirate1) && equipage.containList(pirate2);
+        }
+        while (!verif);
+        equipage.echangeObjet(pirate1, pirate2);
+	}
+}
