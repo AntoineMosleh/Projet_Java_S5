@@ -186,7 +186,7 @@ public class Equipage
 						/* Si p2 a un tresor que p1 aurait prefere */
 						if (indiceTP1P1 >= indiceTP2P1)
 						{
-							System.out.println("jalousie entre " + p1.getNomPirate() + " et " + p2.getNomPirate());
+							System.out.println("\n" + p1.getNomPirate() + " est jaloux de " + p2.getNomPirate());
 							already_counted[p1.getNomPirate() - 'A'] = true;
 							count++;
 						}
@@ -213,7 +213,8 @@ public class Equipage
 	 * Méthode permettant d'afficher le coût de la solution actuelle */
 	public void afficherCout()
 	{
-		System.out.println("La solution actuelle a un cout de " + calculCout());
+		int	cout = calculCout();
+		System.out.println("\nLa solution actuelle a un cout de " + cout + "\n");
 	}
 	
 	/**
@@ -249,6 +250,25 @@ public class Equipage
 		if(listNom.contains(nom))
 			return true;
 		return false;
+	}
+
+	/**
+	 * Methode permettant de savoir si toutes les listes de preferences
+	 * des pirates ont ete entrees
+	 *@return true si l'equipage est complet, false sinon */
+	public boolean equipageComplet()
+	{
+		boolean verificationFinal=true;
+		boolean verification;
+		for(int i=0;i<listePirates.size();i++)
+		{
+			verification = listePirates.get(i).listIsVide();
+			if(verification==true)
+			{
+				verificationFinal=false;
+			}
+		}
+		return verificationFinal;
 	}
 
 	/** Méthode de vérification qu'une relation de jalousie existe déjà entre
