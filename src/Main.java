@@ -8,6 +8,7 @@ public class Main
         Scanner sc = new Scanner(System.in);
         int nbPirates=creationEquipage(sc);
         Equipage equipage = new Equipage(nbPirates);
+
         menu1(sc, equipage, nbPirates);
         menu2(sc, equipage);
         sc.close();
@@ -121,6 +122,7 @@ public class Main
             e.afficherRelations();
 
         }
+
         /**
          * Méthode permettant de saisir la liste de préférence d'un pirate
          * @param sc Scanner permettant la saisie
@@ -131,14 +133,16 @@ public class Main
         {
             int[] listeDePreference = new int[nbPirates];
             String str;
-            String line;
             char nomPirate;
             int objet;
-            Boolean verif=false;
-            Boolean verif2=false;
+            boolean verif=false;
+            boolean verif2=false;
+            boolean listePrefIncorrecte;
             Pirate pirate;
+
             System.out.println("Nous allons maintenant proceder a l'ajout des preferences pour les pirates :)");
-            System.out.println(e.compoEquipage()); 
+            System.out.println(e.compoEquipage());
+
             do
             {
                 System.out.println("Veuillez entrer le nom du pirate :");
@@ -149,43 +153,46 @@ public class Main
                 {
                     System.out.println("le pirate : "+nomPirate+" n'existe pas ");
                 }
-            }while(verif==false);
+            }
+            while(verif==false);
+
             do
             {
                 pirate=e.findPirate(nomPirate);
                 verif2=pirate.listIsVide();
                 if(verif2==true)
                 {
-                    System.out.println("Veuillez maintenant saisir la liste de preference de "+ nomPirate +" contenant "+nbPirates+" objets separe par des espaces");
-                    //System.out.println(line);
-                    for (int i=0; i<nbPirates; i++)
+                    do
                     {
-                        objet =sc.nextInt(); //line.charAt(i*2)- '0';
-                        if ( objet<= nbPirates && objet>0)
+                        System.out.println("Veuillez maintenant saisir la liste de preference de "+ nomPirate +" contenant "+nbPirates+" objets separe par des espaces");
+                        //System.out.println(line);
+                        listePrefIncorrecte = false;
+                        for (int i=0; i<nbPirates; i++)
                         {
-                            listeDePreference[i] = objet;
-                        }
-                        else
-                        {
-                            System.out.println("L'objet "+objet+" est incorrect");
-                            System.out.println("Veuillez maintenant saisir la liste de preference de "+ nomPirate +" contenant "+nbPirates+" objets separe par des espaces");
-
-                            i--;
-
+                            objet =sc.nextInt(); //line.charAt(i*2)- '0';
+                            if ( objet<= nbPirates && objet>0)
+                            {
+                                listeDePreference[i] = objet;
+                            }
+                            else
+                            {
+                                System.out.println("L'objet "+objet+" est incorrect");
+                                i = nbPirates; //Sortir de la boucle prematurement
+                                listePrefIncorrecte = true;
+                            }
                         }
                     }
+                    while (listePrefIncorrecte);
                     sc.nextLine();
-                    /*while(sc.hasNext())
-                    {
-                        sc.nextLine();
-                    }*/
                     e.ajoutPreferencePirate(nomPirate, listeDePreference);
                 }
                 else
                 {
                     System.out.println("Le pirate a deja une liste de preference");
                 }
-            }while(verif2==false);
+            }
+            while(verif2==false);
+
             System.out.print("Le pirate choisi,avec sa liste de preference: ");
             int[] tabTest;
             tabTest=pirate.getListePref();
