@@ -1,5 +1,7 @@
 NAME		=	Main
 
+JAR_NAME	=	projet_THAI_MOSLEH_ZALUGAS.jar
+
 ZIP_NAME	=	projet_THAI_MOSLEH_ZALUGAS.zip
 
 DIR_SRC		=	src
@@ -28,7 +30,7 @@ $(DIR_OUT):
 			@mkdir -p $(DIR_OUT)
 
 jar:			$(NAME)
-			@jar -cvf projet_THAI_MOSLEH_ZALUGAS.jar $(DIR_OUT)
+			@jar -cvf $(JAR_NAME) $(DIR_OUT)
 			@echo "$(GREEN)Archive .jar créée.$(END)"
 
 zip:			$(NAME)
@@ -45,6 +47,8 @@ $(DIR_DOC):
 clean:
 			rm -f $(wildcard $(DIR_OUT)/*.class)
 			rm -rf $(DIR_DOC)
+			rm -f $(JAR_NAME)
+			rm -f $(ZIP_NAME)
 
 re:			clean all
 
