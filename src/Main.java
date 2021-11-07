@@ -66,7 +66,7 @@ public class Main
                 }
                 else
                 {
-                    System.out.println("Vous avez choisis le pirate: "+ pirateJaloux1);
+                    System.out.println("Vous avez choisi le pirate: "+ pirateJaloux1);
                 }
 
             }while(verif1==false);
@@ -273,7 +273,7 @@ public class Main
                     e.afficherCout();
 					break;
 				case 3:
-                    System.out.println("Au revoir.");
+                    System.out.println("Au revoir !");
 					break;
 				default:
 					System.out.println("Le choix " + choix + " n'existe pas.");
@@ -294,13 +294,20 @@ public class Main
 		char    pirate2;
         boolean verif;
 
+        pirate1 = ' ';
+        pirate2 = ' ';
         do
         {
             System.out.println("Echange des objets entre deux pirates.");
             System.out.print("Premier pirate pour l'echange : ");
             pirate1 = sc.next().charAt(0);
-            System.out.print("Second pirate pour l'echange : ");
-            pirate2 = sc.next().charAt(0);
+            if (!equipage.containList(pirate1))
+                System.out.println("Le pirate " + pirate1 + " n'existe pas.");
+            else
+            {
+                System.out.print("Second pirate pour l'echange : ");
+                pirate2 = sc.next().charAt(0);
+            }
             sc.nextLine();
             verif = equipage.containList(pirate1) && equipage.containList(pirate2);
         }
