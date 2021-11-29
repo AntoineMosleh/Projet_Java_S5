@@ -1,31 +1,11 @@
 #+TITLE: Todos
 
-* TODO RENDU 1 : Programme de gestion d'équipage
-** DONE Classe pirate
-*** DONE attribut nom
-*** DONE attribut liste de préférences (vide au début)
-*** DONE constructeur avec nom
-*** DONE méthode ajouter préférences
-** DONE Classe equipage
-*** DONE attribut nb pirates
-*** DONE attribut liste de pirates
-*** DONE attribut matrice adjacence
-*** DONE attribut pour stocker affectation pirate->trésor (=résultat algo de partage)
-*** DONE méthode ajouter relation entre deux pirates (relation = ne s'aiment pas)
-*** DONE méthode ajout de préférences pour un pirate donné
-*** DONE méthode échange objets
-*** DONE méthode solution naïve
-*** DONE méthode affichage solution actuelle
-*** DONE méthode affichage du coût
-** DONE Main
-*** DONE Demander à l'utilisateur le nb de pirates ([1;26])
-*** DONE Menu permettant les actions
-**** DONE Ajouter une relation
-**** DONE Ajouter des préférences
-**** DONE Fin
-*** DONE Menu présenté après la configuration de l'équipage :
-**** DONE Proposer solution naïve
-**** DONE Échanger objets (échange les objets de deux pirates)
-**** DONE Afficher coût (solution actuelle)
-**** DONE Fin
+* TODO Rendu 2
+** TODO Menu (Refaire un main)
+*** TODO Parsing fichier => Antoine (Nouvelle classe)
+*** TODO Implementer algo approximation (resolution automatique) (classe Equipage) => Bastien
+*** TODO Gerer resolution automatique dans le menu
+*** TODO Resolution manuelle (Ajouter gestion des erreurs dans code existant)
+*** TODO Sauvegarde
+*** TODO GERER TOUTES ERREURS POSSIBLES => Yvan
 ** TODO Rendre projet
