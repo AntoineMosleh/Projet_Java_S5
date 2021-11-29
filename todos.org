@@ -3,9 +3,13 @@
 * TODO Rendu 2
 ** TODO Menu (Refaire un main)
 *** TODO Parsing fichier => Antoine (Nouvelle classe)
+DEADLINE: <2021-12-02 Thu 20:00>
 *** TODO Implementer algo approximation (resolution automatique) (classe Equipage) => Bastien
+DEADLINE: <2021-12-02 Thu 20:00>
 *** TODO Gerer resolution automatique dans le menu
 *** TODO Resolution manuelle (Ajouter gestion des erreurs dans code existant)
 *** TODO Sauvegarde
-*** TODO GERER TOUTES ERREURS POSSIBLES => Yvan
+*** TODO Chercher toutes les erreurs => Yvan
+DEADLINE: <2021-12-02 Thu 20:00>
+*** TODO GERER TOUTES ERREURS POSSIBLES
 ** TODO Rendre projet
