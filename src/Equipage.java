@@ -52,6 +52,18 @@ public class Equipage
 		matriceAdjacence[i][j] = true;
 		matriceAdjacence[j][i] = true;
 	}
+    /**
+	 * Ajout d'une relation "est jaloux" entre deux pirates quand leur nom de pirate ne sont pas des lettres
+	 * @param p1 le nom du premier pirate
+	 * @param p2 le nom du deuxieme pirate
+	 */
+	public void ajouterRelation2(char p1, char p2)
+	{
+		int i =Character.getNumericValue(p1);
+		int j =Character.getNumericValue(p2);
+		matriceAdjacence[i][j] = true;
+		matriceAdjacence[j][i] = true;
+	}
 
 	/**
 	 * Ajout d'une liste de préférences pour un pirate donné
