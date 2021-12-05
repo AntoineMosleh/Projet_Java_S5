@@ -1,5 +1,8 @@
+package up.mi.yt_am_bz.partage_butin.programme;
+
 import java.util.List;
 import java.util.Scanner;
+import up.mi.yt_am_bz.partage_butin.pirates.*;
 
 public class Main 
 {

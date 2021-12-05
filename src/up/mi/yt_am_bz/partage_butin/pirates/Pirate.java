@@ -1,3 +1,5 @@
+package up.mi.yt_am_bz.partage_butin.pirates;
+
 /**
  * Classe de représentation d'un Pirate
  * 
@@ -5,9 +7,10 @@
  */
 public class Pirate    
 {
-    //private String nomPirate; //  represente le nom du pirate
-    private char nomPirate; //  represente le nom du pirate
-    private int[] listePref; // represente la liste des objets préferés de chaque pirate.
+    /*represente le nom du pirate*/
+    private char nomPirate;
+    /* represente la liste des objets préferés de chaque pirate.*/
+    private int[] listePref;
 
     /**
      * Constructeur permettant d'initialiser le tableau des préférences pour chaque pirates

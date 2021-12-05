@@ -1,6 +1,9 @@
-import java.io.File;
+package up.mi.yt_am_bz.partage_butin.programme;
 
+import java.io.File;
 import java.io.*;
+import up.mi.yt_am_bz.partage_butin.pirates.*;
+
 public class LectureFichier
 {
 

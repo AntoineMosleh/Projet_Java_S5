@@ -1,3 +1,5 @@
+package up.mi.yt_am_bz.partage_butin.pirates;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -9,12 +11,14 @@ import java.util.Collection;
  */
 public class Equipage
 {
-	private int					nbPirates; //Nombre de pirates
-	private List<Pirate>		listePirates; //Liste des pirates de l'equipage
-	private boolean[][]			matriceAdjacence; //Liste d'adjacence pour representer
-												  //les relations entre les pirates
-	private Map<Character,Integer>	affectationTresors; //Tableau contenant l'affectation
-													//du trésor par pirate
+	/*Nombre de pirates*/
+	private int					nbPirates;
+	/*Liste des pirates de l'equipage*/
+	private List<Pirate>		listePirates;
+	/*Liste d'adjacence pour represente les relations entre les pirates*/
+	private boolean[][]			matriceAdjacence;
+	/*Tableau contenant l'affectation du trésor par pirate*/
+	private Map<Character,Integer>	affectationTresors;
 
 	/**
 	 * Constructeur
@@ -26,7 +30,6 @@ public class Equipage
 		matriceAdjacence = new boolean[nbPirates][nbPirates];
 		affectationTresors = new HashMap<Character,Integer>(nbPirates);
 		this.initPirates();
-		// this.initMatrice();
 	}
 
 	/**
@@ -37,7 +40,6 @@ public class Equipage
 
 		for (int i = 0; i < nbPirates; i++)
 			listePirates.add(new Pirate(nom++, nbPirates));
-
 	}
 
 	/**
@@ -52,6 +54,7 @@ public class Equipage
 		matriceAdjacence[i][j] = true;
 		matriceAdjacence[j][i] = true;
 	}
+
     /**
 	 * Ajout d'une relation "est jaloux" entre deux pirates quand leur nom de pirate ne sont pas des lettres
 	 * @param p1 le nom du premier pirate
@@ -143,7 +146,8 @@ public class Equipage
 
 
 	/**
-	 * Méthode pour afficher la solution actuelle de l'équipage */
+	 * Méthode pour afficher la solution actuelle de l'équipage
+	 */
 	public void afficherSolution()
 	{
 		char	nom = 'A';
@@ -163,18 +167,29 @@ public class Equipage
 	 *@return */
 	private int	calculCout()
 	{
-		int	count; //le cout total
+		/*le cout total*/
+		int	count;
+		/*compteurs pour parcours de la matrice*/
 		int	i;
 		int	j;
-		boolean[] already_counted = new boolean[nbPirates]; //pour ne compter qu'une fois chaque pirate
-		Pirate	p1; //pirate compare 1
-		Pirate	p2; //pirate compare 2
-		int		t1; //tresor du pirate 1
-		int		t2; //tresor du pirate 2
-		int		indiceTP1P1; //indice du tresor de p1 dans les preferences de p1
-		int		indiceTP1P2; //indice du tresor de p1 dans les preferences de p2
-		int		indiceTP2P1; //indice du tresor de p2 dans les preferences de p1
-		int		indiceTP2P2; //indice du tresor de p2 dans les preferences de p2
+		/*pour ne compter qu'une fois chaque pirate*/
+		boolean[] already_counted = new boolean[nbPirates];
+		/*pirate compare 1*/
+		Pirate	p1;
+		/*pirate compare 2*/
+		Pirate	p2;
+		/*tresor du pirate 1*/
+		int		t1;
+		/*tresor du pirate 2*/
+		int		t2;
+		/*indice du tresor de p1 dans les preferences de p1*/
+		int		indiceTP1P1;
+		/*indice du tresor de p1 dans les preferences de p2*/
+		int		indiceTP1P2;
+		/*indice du tresor de p2 dans les preferences de p1*/
+		int		indiceTP2P1;
+		/*indice du tresor de p2 dans les preferences de p2*/
+		int		indiceTP2P2;
 
 		count = 0;
 		for (i = 0; i < matriceAdjacence.length; i++)
