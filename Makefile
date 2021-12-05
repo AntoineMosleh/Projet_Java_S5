@@ -4,13 +4,13 @@ JAR_NAME	=	projet_THAI_MOSLEH_ZALUGAS.jar
 
 ZIP_NAME	=	projet_THAI_MOSLEH_ZALUGAS.zip
 
-DIR_SRC		=	src
+DIR_SRC		=	src/up/mi/yt_am_bz/partage_butin/
 
 DIR_OUT		=	bin
 
 DIR_DOC		=	documentation
 
-SRCS		=	$(wildcard $(DIR_SRC)/*.java)
+SRCS		=	$(wildcard $(DIR_SRC)/*/*.java)
 
 GREEN		=	\033[1;32m
 
