@@ -7,163 +7,182 @@ import java.util.HashMap;
 import java.util.Collection;
 
 /**
- * Classe de gestion d'un équipage de pirates
+ * Classe de gestion d'un equipage de pirates
  */
 public class Equipage
 {
 	/*Nombre de pirates*/
 	private int					nbPirates;
+	/*Numero du prochain pirate a ajouter*/
+	private int					nextPirate;
 	/*Liste des pirates de l'equipage*/
 	private List<Pirate>		listePirates;
 	/*Liste d'adjacence pour represente les relations entre les pirates*/
 	private boolean[][]			matriceAdjacence;
-	/*Tableau contenant l'affectation du trésor par pirate*/
-	private Map<Character,Integer>	affectationTresors;
+	/*Liste des objets existants pour l'equipage*/
+	private Tresor[]			tresorsDispos;
+	/*Tableau contenant l'affectation du tresor par pirate*/
+	private Map<Pirate,Tresor>	affectationTresors;
+
+	// /**
+	//  * Constructeur vide
+	//  */
+	// public Equipage()
+	// {
+	// 	nbPirates = 0;
+	// 	nextPirate = 0;
+	// 	listePirates = new ArrayList<Pirate>();
+	// 	matriceAdjacence = new boolean[1][1];
+	// 	tresorsDispos = new Tresor[1];
+	// 	affectationTresors = new HashMap<String, String>();
+	// }
 
 	/**
 	 * Constructeur
-	 * @param nbPirates le nombre de pirates*/
+	 * @param nbPirates le nombre de pirates
+	 */
 	public Equipage(int nbPirates)
 	{
 		this.nbPirates = nbPirates;
+		nextPirate = 0;
 		this.listePirates = new ArrayList<Pirate>(nbPirates);
 		matriceAdjacence = new boolean[nbPirates][nbPirates];
-		affectationTresors = new HashMap<Character,Integer>(nbPirates);
-		this.initPirates();
+		tresorsDispos = new Tresor[nbPirates];
+		affectationTresors = new HashMap<Pirate, Tresor>(nbPirates);
+		// this.initPirates();
 	}
 
 	/**
-	 * Initialisation de la liste de pirates */
-	private void initPirates()
-	{
-		char nom = 'A';
+	 * Initialisation de la liste de pirates
+	 */
+	// private void initPirates()
+	// {
+	// 	char nom = 'A';
 
-		for (int i = 0; i < nbPirates; i++)
-			listePirates.add(new Pirate(nom++, nbPirates));
+	// 	for (int i = 0; i < nbPirates; i++)
+	// 		listePirates.add(new Pirate(nom++, nbPirates));
+	// }
+
+	/**
+	 * Ajout d'un pirate dans l'equipage
+	 * @param nom le nom du pirate
+	 */
+	public void ajoutPirate(String nom)
+	{
+		listePirates.add(new Pirate(nom, nbPirates, nextPirate++));
+	}
+
+	/**
+	 * Ajout d'un pirate dans l'equipage
+	 * @param pirate le pirate
+	 */
+	public void ajoutPirate(Pirate pirate)
+	{
+		listePirates.add(pirate);
 	}
 
 	/**
 	 * Ajout d'une relation "est jaloux" entre deux pirates
-	 *@param p1 le nom du premier pirate
-	 *@param p2 le nom du deuxième pirate
-	 */
-	public void ajouterRelation(char p1, char p2)
-	{
-		int i = (int)p1 - 'A';
-		int j = (int)p2 - 'A';
-		matriceAdjacence[i][j] = true;
-		matriceAdjacence[j][i] = true;
-	}
-
-    /**
-	 * Ajout d'une relation "est jaloux" entre deux pirates quand leur nom de pirate ne sont pas des lettres
 	 * @param p1 le nom du premier pirate
 	 * @param p2 le nom du deuxieme pirate
 	 */
-	public void ajouterRelation2(char p1, char p2)
+	public void ajouterRelation(String p1, String p2)
 	{
-		int i =Character.getNumericValue(p1);
-		int j =Character.getNumericValue(p2);
+		int i = getPirate(p1).getNumPirate();
+		int j = getPirate(p2).getNumPirate();
 		matriceAdjacence[i][j] = true;
 		matriceAdjacence[j][i] = true;
 	}
 
+    // /**
+	//  * Ajout d'une relation "est jaloux" entre deux pirates quand leur nom de pirate ne sont pas des lettres
+	//  * @param p1 le nom du premier pirate
+	//  * @param p2 le nom du deuxieme pirate
+	//  */
+	// public void ajouterRelation2(char p1, char p2)
+	// {
+	// 	int i =Character.getNumericValue(p1);
+	// 	int j =Character.getNumericValue(p2);
+	// 	matriceAdjacence[i][j] = true;
+	// 	matriceAdjacence[j][i] = true;
+	// }
+
 	/**
-	 * Ajout d'une liste de préférences pour un pirate donné
-	 * @param nomP le nom du pirate concerné
-	 * @param pref liste de préférences
+	 * Ajout d'une liste de preferences pour un pirate donne
+	 * @param nomP le nom du pirate concerne
+	 * @param pref liste de preferences
 	 */
-	public void ajoutPreferencePirate(char nomP,int[] pref)
+	public void ajoutPreferencePirate(String nomP, Tresor[] pref)
 	{
-		for(int i=0;i<listePirates.size();i++)
-		{
-			if (listePirates.get(i).getNomPirate()==nomP)
-			{
-				listePirates.get(i).ajoutPreference(pref);
-			}
-		}
-	}
-
-	/** Méthode de recherche d'un pirate
-	 *@param nom le nom en char du pirate
-	 *@return Le pirate trouvé ou null sinon*/
-	public Pirate findPirate(char nom)
-	{
-		for (Pirate p : listePirates)
-			if (p.getNomPirate() == nom)
-				return (p);
-		return (null);
+		getPirate(nomP).ajoutPreference(pref);
 	}
 
 	/**
-	 * Échange d'un objet entre 2 pirates
+	 * Echange d'un objet entre 2 pirates
 	 * @param pirate1 nom du premier pirate
-	 * @param pirate2 nom du deuxième pirate
+	 * @param pirate2 nom du deuxieme pirate
 	 */
-	public void echangeObjet(char pirate1,char pirate2)
+	public void echangeObjet(String pirate1, String pirate2)
 	{
-		if (affectationTresors.containsKey(pirate1) && affectationTresors.containsKey(pirate2))
+		if (affectationTresors.containsKey(getPirate(pirate1)) && affectationTresors.containsKey(getPirate(pirate2)))
 		{
-			Integer objet_ephemere =affectationTresors.get(pirate1);
-			affectationTresors.replace(pirate1, affectationTresors.get(pirate2));
-			affectationTresors.replace(pirate2, objet_ephemere);			
+			Tresor objet_ephemere = affectationTresors.get(getPirate(pirate1));
+			affectationTresors.replace(getPirate(pirate1), affectationTresors.get(getPirate(pirate2)));
+			affectationTresors.replace(getPirate(pirate2), objet_ephemere);
 		}
-
 	}
 
 	/**
-	 * Méthode de résolution naïve du problème
+	 * Methode de resolution naive du probleme
 	 *(Chaque pirate obtient sa premiere preference non deja prise) */
 	public void	solutionNaive()
 	{
-		int[]	tresorsDonnes = new int[nbPirates];
-		int		i;
-		int		j;
+		// Tresor[]	tresorsDonnes = new Tresor[nbPirates];
+		int			i;
+		// int			j;
 
-		for (i = 0; i < nbPirates; i++)
-			tresorsDonnes[i] = 0;
+		// for (i = 0; i < nbPirates; i++)
+		// 	tresorsDonnes[i] = ;
 
 		for (Pirate p : listePirates)
 		{
 			i = 0;
 			while (i < nbPirates && affectationTresors.containsValue(p.getListePref()[i]))
 				i++;
-			affectationTresors.put(p.getNomPirate(),p.getListePref()[i]);
+			affectationTresors.put(p,p.getListePref()[i]);
 		}
 	}
 
-	/**
-	 * Méthode privée permettant de savoir si un nombre est contenu dans un tableau
-	 *@param tab le tableau dans lequel vérifier
-	 *@param n le nombre à chercher*/
-	private boolean is_contained(int[] tab, int n)
-	{
-		for (int x : tab)
-			if (x == n)
-				return (true);
-		return (false);
-	}
+	// /**
+	//  * Methode privee permettant de savoir si un nombre est contenu dans un tableau
+	//  *@param tab le tableau dans lequel verifier
+	//  *@param n le nombre a chercher*/
+	// private boolean is_contained(int[] tab, int n)
+	// {
+	// 	for (int x : tab)
+	// 		if (x == n)
+	// 			return (true);
+	// 	return (false);
+	// }
 
 
 	/**
-	 * Méthode pour afficher la solution actuelle de l'équipage
+	 * Methode pour afficher la solution actuelle de l'equipage
 	 */
 	public void afficherSolution()
 	{
-		char	nom = 'A';
-
 		if (affectationTresors.isEmpty())
 			System.out.println("Pas encore de solution pour l'equipage.");
 		else
 		{
 			System.out.println("Solution actuelle : ");
-			for (nom = 'A'; nom - 'A' < nbPirates; nom++)
-				System.out.println(nom + " : " + affectationTresors.get(nom));
+			for (Pirate p : listePirates)
+				System.out.println(p.getNomPirate() + " : " + affectationTresors.get(p).getNom());
 		}
 	}
 
 	/**
-	 * Méthode de calcul du cout total de la solution actuelle
+	 * Methode de calcul du cout total de la solution actuelle
 	 *@return */
 	private int	calculCout()
 	{
@@ -179,9 +198,9 @@ public class Equipage
 		/*pirate compare 2*/
 		Pirate	p2;
 		/*tresor du pirate 1*/
-		int		t1;
+		Tresor	t1;
 		/*tresor du pirate 2*/
-		int		t2;
+		Tresor	t2;
 		/*indice du tresor de p1 dans les preferences de p1*/
 		int		indiceTP1P1;
 		/*indice du tresor de p1 dans les preferences de p2*/
@@ -201,20 +220,24 @@ public class Equipage
 				{
 					p1 = listePirates.get(i);
 					p2 = listePirates.get(j);
-					t1 = affectationTresors.get(p1.getNomPirate());
-					t2 = affectationTresors.get(p2.getNomPirate());
-					indiceTP1P1 = find_index(p1.getListePref(),t1);
-					indiceTP1P2 = find_index(p2.getListePref(),t1);
-					indiceTP2P1 = find_index(p1.getListePref(),t2);
-					indiceTP2P2 = find_index(p2.getListePref(),t2);
+					t1 = affectationTresors.get(p1);
+					t2 = affectationTresors.get(p2);
+					indiceTP1P1 = p1.getIndexPref(t1);
+					indiceTP1P2 = p2.getIndexPref(t1);
+					indiceTP2P1 = p1.getIndexPref(t2);
+					indiceTP2P2 = p2.getIndexPref(t2);
+					// indiceTP1P1 = find_index(p1.getListePref(),t1);
+					// indiceTP1P2 = find_index(p2.getListePref(),t1);
+					// indiceTP2P1 = find_index(p1.getListePref(),t2);
+					// indiceTP2P2 = find_index(p2.getListePref(),t2);
 					/* Si p1 et p2 ont un tresor correspondant a une preference differente
 					 * Et que p1 n'a pas encore ete compte */
-					if (indiceTP1P1 != indiceTP2P2 && !already_counted[p1.getNomPirate() - 'A'])
+					if (indiceTP1P1 != indiceTP2P2 && !already_counted[p1.getNumPirate()])
 						/* Si p2 a un tresor que p1 aurait prefere */
-						if (indiceTP1P1 >= indiceTP2P1)
+						if (indiceTP1P1 >= indiceTP2P1) //peut etre mettre >
 						{
 							System.out.println("\n" + p1.getNomPirate() + " est jaloux de " + p2.getNomPirate());
-							already_counted[p1.getNomPirate() - 'A'] = true;
+							already_counted[p1.getNumPirate()] = true;
 							count++;
 						}
 				}
@@ -224,20 +247,8 @@ public class Equipage
 	}
 
 	/**
-	 * Méthode privée permettant de trouver le premier index d'un nombre donne dans un tableau
-	 *@param tab le tableau dans lequel rechercher
-	 *@param nb le nombre a chercher
-	 *@return l'index du nombre dans le tableau ou -1 s'il n'est pas dedans*/
-	private int find_index(int[] tab, int nb)
-	{
-		for (int i = 0; i < tab.length; i++)
-			if (tab[i] == nb)
-				return (i);
-		return (-1);
-	}
-
-	/**
-	 * Méthode permettant d'afficher le coût de la solution actuelle */
+	 * Methode permettant d'afficher le coût de la solution actuelle
+	 */
 	public void afficherCout()
 	{
 		int	cout = calculCout();
@@ -245,7 +256,8 @@ public class Equipage
 	}
 	
 	/**
-	 * Affichage de la matrice d'adjacence (principalement pour les tests) */
+	 * Affichage de la matrice d'adjacence (principalement pour les tests)
+	 */
 	public void afficherRelations()
 	{
 		int	i;
@@ -263,20 +275,25 @@ public class Equipage
 		}
 	}
 
-	/** Méthode de vérification qu'un pirate existe dans l'equipage
+	/** Methode de verification qu'un pirate existe dans l'equipage
 	 *@param nom le nom recherche
 	 *@return true s'il existe, false sinon*/
-	public boolean containList(char nom)
+	public boolean containList(String nom)
 	{
-		ArrayList<Character> listNom;
-		listNom = new ArrayList<Character>();
-		for (int i=0; i<listePirates.size(); i++)
-		{
-			listNom.add(listePirates.get(i).getNomPirate());
-		}
-		if(listNom.contains(nom))
-			return true;
-		return false;
+		/* Si la methode getPirate renvoie bien un pirate,
+		alors un pirate possede bien ce nom*/
+		if (getPirate(nom) != null)
+			return (true);
+		return (false);
+		// ArrayList<Character> listNom;
+		// listNom = new ArrayList<Character>();
+		// for (int i=0; i<listePirates.size(); i++)
+		// {
+		// 	listNom.add(listePirates.get(i).getNomPirate());
+		// }
+		// if(listNom.contains(nom))
+		// 	return true;
+		// return false;
 	}
 
 	/**
@@ -285,34 +302,38 @@ public class Equipage
 	 *@return true si l'equipage est complet, false sinon */
 	public boolean equipageComplet()
 	{
-		boolean verificationFinal=true;
-		boolean verification;
-		for(int i=0;i<listePirates.size();i++)
-		{
-			verification = listePirates.get(i).listIsVide();
-			if(verification==true)
-			{
-				verificationFinal=false;
-			}
-		}
-		return verificationFinal;
+		for (Pirate p : listePirates)
+			if (p.listIsVide())
+				return (false);
+		return (true);
+		// boolean verificationFinal=true;
+		// boolean verification;
+		// for(int i=0;i<listePirates.size();i++)
+		// {
+		// 	verification = listePirates.get(i).listIsVide();
+		// 	if(verification==true)
+		// 	{
+		// 		verificationFinal=false;
+		// 	}
+		// }
+		// return verificationFinal;
 	}
 
-	/** Méthode de vérification qu'une relation de jalousie existe déjà entre
+	/** Methode de verification qu'une relation de jalousie existe deja entre
 	 *deux pirates
 	 *@param pirate1 le premier pirate du couple a tester
 	 *@param pirate2 le seconde pirate du couple a tester
 	 *@return true si la relation existe, false sinon*/
-	public boolean relationExiste(char pirate1, char pirate2)
+	public boolean relationExiste(String pirate1, String pirate2)
 	{
-		int i = pirate1 - 'A';
-		int j = pirate2 - 'A';
+		int i = getPirate(pirate1).getNumPirate();
+		int j = getPirate(pirate2).getNumPirate();
 		return matriceAdjacence[i][j];
 	}
 
-
 	/** Getter pour la liste des pirates
-	 *@return */
+	 *@return
+	 */
 	public List<Pirate> getListePirate()
 	{
 		return listePirates;
@@ -324,6 +345,20 @@ public class Equipage
 	{
 		return matriceAdjacence;
 	}
+
+	/**
+	 * Getter pour un pirate en fonction de son nom
+	 * @param nom le nom du pirate recherche
+	 * @return le pirate s'il existe, null sinon
+	 */
+	public Pirate getPirate(String nom)
+	{
+		for (Pirate p : listePirates)
+			if (p.equals(nom))
+				return (p);
+		return (null);
+	}
+
     /**
 	 * Methode permettant d'afficher les noms des membres de l'equipage
 	 * @return 

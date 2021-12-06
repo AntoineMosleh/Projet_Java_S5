@@ -1,6 +1,18 @@
 #+TITLE: Todos
 
 * TODO Rendu 2
+DEADLINE: <2021-12-17 Fri>
+** DONE modifier noms pirates (rendre general)
+CLOSED: [2021-12-06 Mon 09:46]
+** DONE omdifier noms objets (rendre general)
+CLOSED: [2021-12-06 Mon 09:46]
+** TODO changer constructeur equipage ? (Si on ne connait pas le nbPirates, c'est la merde)
+** TODO Changer hashmap affectation dans equipage
+** TODO Ajouter attribut numero dans Pirate => le gerer dans parsing etc
+** TODO Quand on ajoute un pirate a l'equipage, penser a ajouter le nbPirates de chaque pirate
+** TODO Ajouter classe Tresor
+** TODO Liste des objets existants dans equipage
+
 ** TODO Corriger erreurs du rendu 1 [50%]
 **** DONE Ajouter packages
 CLOSED: [2021-12-05 Sun 10:36]
@@ -11,11 +23,9 @@ CLOSED: [2021-12-05 Sun 10:23]
 ** TODO Menu (Refaire un main)
 *** TODO Parsing fichier => Antoine (Nouvelle classe)
 *** TODO Implementer algo approximation (resolution automatique) (classe Equipage) => Bastien
-DEADLINE: <2021-12-02 Thu 20:00>
 *** TODO Gerer resolution automatique dans le menu
 *** TODO Resolution manuelle (Ajouter gestion des erreurs dans code existant)
 *** TODO Sauvegarde
 *** TODO Chercher toutes les erreurs => Yvan
-DEADLINE: <2021-12-02 Thu 20:00>
 *** TODO GERER TOUTES ERREURS POSSIBLES
 ** TODO Rendre projet

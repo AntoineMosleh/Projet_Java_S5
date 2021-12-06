@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.*;
 import up.mi.yt_am_bz.partage_butin.pirates.*;
 
+/**
+ * Gestion du parsing des fichiers
+ */
 public class LectureFichier
 {
 
@@ -26,6 +29,7 @@ public class LectureFichier
                 {
                     pirate=parserPirate(line, nbPirates);
                     //pirates.add(pirate);
+                    //ameliorer avec nouvelle methode equipage.ajoutPirate()
                     equipage.getListePirate().add(pirate);
                 }
                 if (line.startsWith("objet"))
@@ -42,7 +46,6 @@ public class LectureFichier
                     parserPreferences(line, nbPirates, equipage);
                 }
             }
-
         }
         catch(FileNotFoundException e)
         {
@@ -128,5 +131,4 @@ public class LectureFichier
         }
         e.ajoutPreferencePirate(nomP,objets);
     }
- 
 }
