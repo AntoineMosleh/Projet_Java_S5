@@ -159,27 +159,33 @@ public class Equipage
 		{
 			System.out.println("Solution actuelle : ");
 			for (Pirate p : listePirates)
-				System.out.println(p.getNomPirate() + " : " + affectationTresors.get(p).getNom());
+				System.out.println("Pirate " + p.getNomPirate() + " : " + affectationTresors.get(p).getNom());
 		}
 	}
 	
+	/**
+	 * Calcule le cout de la solution actuelle
+	 * @return
+	 */
 	private int calculCout()
 	{
 		/*Cout total*/
 		int			cout = 0;
-		/*Tableau pour ne compter qu'une fois un pirate jaloux*/
-		boolean[]	already_counted = new boolean[nbPirates];
+		/*Compteurs pour le parcours de la matrice*/
 		int			i;
 		int			j;
-
+		/*Le pirate compare au premier*/
 		Pirate		p2;
+		/*Tresor attribue au pirate 1*/
 		Tresor		tp1;
+		/*Tresor attribue au pirate 2*/
 		Tresor		tp2;
-
+		/*Indice du tresor attribue a p1 dans la liste de preference de p1*/
 		int			tp1p1;
+		/*Indice du tresor attribue a p2 dans la liste de preference de p1*/
 		int			tp2p1;
 
-		/*parcourir tous les pirates*/
+		/*parcours de tous les pirates*/
 		for (Pirate p1 : listePirates)
 		{
 			tp1 = affectationTresors.get(p1);
@@ -187,19 +193,19 @@ public class Equipage
 			/*Si le pirate n'a pas son objet prefere*/
 			if (tp1p1 > 0)
 			{
-				/*Parcours de la matrice pour chercher une jalousie*/
-				// for (i = 0; i < matriceAdjacence.length; i++)
+				/*Parcours de la matrice pour chercher une jalousie (i = pirate actuel)*/
 				i = p1.getNumPirate();
 				for (j = 0; j < matriceAdjacence.length; j++)
 				{
-					if (matriceAdjacence[i][j])// && !already_counted[p1.getNumPirate()])
+					/*Si une relation de jalousie existe*/
+					if (matriceAdjacence[i][j])
 					{
 						p2 = getPirate(j);
 						tp2 = affectationTresors.get(p2);
 						tp2p1 = p1.getIndexPref(tp2);
+						/*Si le pirate 2 a eu un objet que le pirate 1 aurait prefere*/
 						if (tp1p1 > tp2p1)
 						{
-							already_counted[p1.getNumPirate()] = true;
 							cout++;
 							System.out.println("\n" + p1.getNomPirate() + " est jaloux de " + p2.getNomPirate());
 						}
