@@ -33,13 +33,29 @@ public class Tresor
 		this.nom = nom;
 	}
 
-	/**
-	 * Verifie l'egalite d'un tresor par rapport a un autre
-	 * @param t le tresor avec lequel comparer
-	 * @return true si le tresor est egal a cette instance, false sinon
-	 */
-	public boolean equals(Tresor t)
+	@Override
+	public boolean equals(Object obj)
 	{
-		return (this.nom.equals(t.getNom()));
+		if (this == obj)
+			return (true);
+		if (obj == null)
+			return (false);
+
+		if (getClass() != obj.getClass())
+			return (false);
+		Tresor t = (Tresor)obj;
+		if (!this.nom.equals(t.getNom()))
+			return (false);
+		return (true);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int	seed = 23;
+		int			result = 1;
+		
+		result = seed * result + nom.hashCode();
+		return (result);
 	}
 }

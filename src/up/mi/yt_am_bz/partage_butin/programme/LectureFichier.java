@@ -115,18 +115,16 @@ public class LectureFichier
         String infos = line.substring("objet(".length(), line.length() - 2);
         // infos=infos.replace("o", "");
 		// return Integer.parseInt(infos);
-		System.out.println("Objet : " + infos);
         return (new Tresor(infos));
     }
 
     private static void parserDeteste(String line,Equipage e)
     {
-        String infos = line.substring("deteste(".length(), line.length() - 1);
+        String infos = line.substring("deteste(".length(), line.length() - 2);
 		String[] infosTab = infos.split(",");
         String nomP1 =infosTab[0];
         String nomP2 =infosTab[1];
-		System.out.println("Pirates qui se detestent : " + nomP1 + ", " + nomP2);
-        // e.ajouterRelation(nomP1, nomP2);
+        e.ajouterRelation(nomP1, nomP2);
     }
 
     private static void parserPreferences(String line,int nbPirates,Equipage e)

@@ -23,19 +23,6 @@ public class Equipage
 	/*Tableau contenant l'affectation du tresor par pirate*/
 	private Map<Pirate,Tresor>	affectationTresors;
 
-	// /**
-	//  * Constructeur vide
-	//  */
-	// public Equipage()
-	// {
-	// 	nbPirates = 0;
-	// 	nextPirate = 0;
-	// 	listePirates = new ArrayList<Pirate>();
-	// 	matriceAdjacence = new boolean[1][1];
-	// 	tresorsDispos = new Tresor[1];
-	// 	affectationTresors = new HashMap<String, String>();
-	// }
-
 	/**
 	 * Constructeur
 	 * @param nbPirates le nombre de pirates
@@ -48,19 +35,7 @@ public class Equipage
 		matriceAdjacence = new boolean[nbPirates][nbPirates];
 		tresorsDispos = new Tresor[nbPirates];
 		affectationTresors = new HashMap<Pirate, Tresor>(nbPirates);
-		// this.initPirates();
 	}
-
-	/**
-	 * Initialisation de la liste de pirates
-	 */
-	// private void initPirates()
-	// {
-	// 	char nom = 'A';
-
-	// 	for (int i = 0; i < nbPirates; i++)
-	// 		listePirates.add(new Pirate(nom++, nbPirates));
-	// }
 
 	/**
 	 * Ajout d'un pirate dans l'equipage
@@ -92,19 +67,6 @@ public class Equipage
 		matriceAdjacence[i][j] = true;
 		matriceAdjacence[j][i] = true;
 	}
-
-    // /**
-	//  * Ajout d'une relation "est jaloux" entre deux pirates quand leur nom de pirate ne sont pas des lettres
-	//  * @param p1 le nom du premier pirate
-	//  * @param p2 le nom du deuxieme pirate
-	//  */
-	// public void ajouterRelation2(char p1, char p2)
-	// {
-	// 	int i =Character.getNumericValue(p1);
-	// 	int j =Character.getNumericValue(p2);
-	// 	matriceAdjacence[i][j] = true;
-	// 	matriceAdjacence[j][i] = true;
-	// }
 
 	/**
 	 * Ajout d'une liste de preferences pour un pirate donne
@@ -175,12 +137,7 @@ public class Equipage
 	 *(Chaque pirate obtient sa premiere preference non deja prise) */
 	public void	solutionNaive()
 	{
-		// Tresor[]	tresorsDonnes = new Tresor[nbPirates];
-		int			i;
-		// int			j;
-
-		// for (i = 0; i < nbPirates; i++)
-		// 	tresorsDonnes[i] = ;
+		int	i;
 
 		for (Pirate p : listePirates)
 		{
@@ -190,19 +147,6 @@ public class Equipage
 			affectationTresors.put(p,p.getListePref()[i]);
 		}
 	}
-
-	// /**
-	//  * Methode privee permettant de savoir si un nombre est contenu dans un tableau
-	//  *@param tab le tableau dans lequel verifier
-	//  *@param n le nombre a chercher*/
-	// private boolean is_contained(int[] tab, int n)
-	// {
-	// 	for (int x : tab)
-	// 		if (x == n)
-	// 			return (true);
-	// 	return (false);
-	// }
-
 
 	/**
 	 * Methode pour afficher la solution actuelle de l'equipage
@@ -218,70 +162,52 @@ public class Equipage
 				System.out.println(p.getNomPirate() + " : " + affectationTresors.get(p).getNom());
 		}
 	}
-
-	/**
-	 * Methode de calcul du cout total de la solution actuelle
-	 *@return */
-	private int	calculCout()
+	
+	private int calculCout()
 	{
-		/*le cout total*/
-		int	count;
-		/*compteurs pour parcours de la matrice*/
-		int	i;
-		int	j;
-		/*pour ne compter qu'une fois chaque pirate*/
-		boolean[] already_counted = new boolean[nbPirates];
-		/*pirate compare 1*/
-		Pirate	p1;
-		/*pirate compare 2*/
-		Pirate	p2;
-		/*tresor du pirate 1*/
-		Tresor	t1;
-		/*tresor du pirate 2*/
-		Tresor	t2;
-		/*indice du tresor de p1 dans les preferences de p1*/
-		int		indiceTP1P1;
-		/*indice du tresor de p1 dans les preferences de p2*/
-		int		indiceTP1P2;
-		/*indice du tresor de p2 dans les preferences de p1*/
-		int		indiceTP2P1;
-		/*indice du tresor de p2 dans les preferences de p2*/
-		int		indiceTP2P2;
+		/*Cout total*/
+		int			cout = 0;
+		/*Tableau pour ne compter qu'une fois un pirate jaloux*/
+		boolean[]	already_counted = new boolean[nbPirates];
+		int			i;
+		int			j;
 
-		count = 0;
-		for (i = 0; i < matriceAdjacence.length; i++)
+		Pirate		p2;
+		Tresor		tp1;
+		Tresor		tp2;
+
+		int			tp1p1;
+		int			tp2p1;
+
+		/*parcourir tous les pirates*/
+		for (Pirate p1 : listePirates)
 		{
-			for (j = 0; j < matriceAdjacence.length; j++)
+			tp1 = affectationTresors.get(p1);
+			tp1p1 = p1.getIndexPref(tp1);
+			/*Si le pirate n'a pas son objet prefere*/
+			if (tp1p1 > 0)
 			{
-				/* Si les deux pirates ont une relation de jalousie */
-				if (i != j && matriceAdjacence[i][j])
+				/*Parcours de la matrice pour chercher une jalousie*/
+				// for (i = 0; i < matriceAdjacence.length; i++)
+				i = p1.getNumPirate();
+				for (j = 0; j < matriceAdjacence.length; j++)
 				{
-					p1 = listePirates.get(i);
-					p2 = listePirates.get(j);
-					t1 = affectationTresors.get(p1);
-					t2 = affectationTresors.get(p2);
-					indiceTP1P1 = p1.getIndexPref(t1);
-					indiceTP1P2 = p2.getIndexPref(t1);
-					indiceTP2P1 = p1.getIndexPref(t2);
-					indiceTP2P2 = p2.getIndexPref(t2);
-					// indiceTP1P1 = find_index(p1.getListePref(),t1);
-					// indiceTP1P2 = find_index(p2.getListePref(),t1);
-					// indiceTP2P1 = find_index(p1.getListePref(),t2);
-					// indiceTP2P2 = find_index(p2.getListePref(),t2);
-					/* Si p1 et p2 ont un tresor correspondant a une preference differente
-					 * Et que p1 n'a pas encore ete compte */
-					if (indiceTP1P1 != indiceTP2P2 && !already_counted[p1.getNumPirate()])
-						/* Si p2 a un tresor que p1 aurait prefere */
-						if (indiceTP1P1 >= indiceTP2P1) //peut etre mettre >
+					if (matriceAdjacence[i][j])// && !already_counted[p1.getNumPirate()])
+					{
+						p2 = getPirate(j);
+						tp2 = affectationTresors.get(p2);
+						tp2p1 = p1.getIndexPref(tp2);
+						if (tp1p1 > tp2p1)
 						{
-							System.out.println("\n" + p1.getNomPirate() + " est jaloux de " + p2.getNomPirate());
 							already_counted[p1.getNumPirate()] = true;
-							count++;
+							cout++;
+							System.out.println("\n" + p1.getNomPirate() + " est jaloux de " + p2.getNomPirate());
 						}
+					}
 				}
 			}
 		}
-		return (count);
+		return (cout);
 	}
 
 	/**
@@ -410,6 +336,19 @@ public class Equipage
 		return (null);
 	}
 
+	/**
+	 * Getter pour un pirate en fonction de son numero
+	 * @param num le numero du pirate recherche
+	 * @return le pirate s'il existe, null sinon
+	 */
+	public Pirate getPirate(int num)
+	{
+		for (Pirate p : listePirates)
+			if (p.getNumPirate() == num)
+				return (p);
+		return (null);
+	}
+	
     /**
 	 * Methode permettant d'afficher les noms des membres de l'equipage
 	 * @return 

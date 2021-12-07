@@ -17,9 +17,24 @@ CLOSED: [2021-12-05 Sun 10:36]
 **** DONE Enlever commentaires inline
 CLOSED: [2021-12-05 Sun 10:23]
 **** TODO Verifier warnings (?)
-**** TODO Probleme calcul de cout
+**** DONE Probleme calcul de cout
+**** DONE Resolution naive a corriger
+
+Cout :
+On prend un pirate A et un pirate B
+A a une liste de preferences : [1,2,3,...]
+B a une liste de preferences : [3,2,1,...]
+Des objets sont donnes a chaque pirate.
+A la fin,
+A est jaloux de B ssi:
+
+1. il y a une relation entre A et B
+2. A n'a pas son objet d'indice 0
+3. indice objet de A dans pref de A > indice objet de B dans A
+
 ** TODO Menu (Refaire un main)
-*** TODO Parsing fichier => Antoine (Nouvelle classe)
+*** DONE Parsing fichier => Antoine (Nouvelle classe)
+*** TODO Gerer toutes les erreurs possibles de parsing
 *** TODO Implementer algo approximation (resolution automatique) (classe Equipage) => Bastien
 *** TODO Gerer resolution automatique dans le menu
 *** TODO Resolution manuelle (Ajouter gestion des erreurs dans code existant)

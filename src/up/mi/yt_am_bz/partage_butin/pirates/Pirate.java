@@ -105,14 +105,30 @@ public class Pirate
 		return (nom.equals(this.nomPirate));
 	}
 
-	/**
-	 * Verification d'egalite d'un pirate par rapport a une instance de pirate
-	 * @param pirate le nom du pirate
-	 * @return true si les instances de pirate sont les memes, false sinon
-	 */
-	public boolean equals(Pirate pirate)
+	@Override
+	public boolean equals(Object obj)
 	{
-		return (pirate == this);
+		if (this == obj)
+			return (true);
+		if (obj == null)
+			return (false);
+
+		if (getClass() != obj.getClass())
+			return (false);
+		Pirate p = (Pirate)obj;
+		if (!this.nomPirate.equals(p.getNomPirate()))
+			return (false);
+		return (true);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int	seed = 23;
+		int			result = 1;
+
+		result = seed * result + nomPirate.hashCode();
+		return (result);
 	}
 
 	/**
