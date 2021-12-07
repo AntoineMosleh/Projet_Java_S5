@@ -138,8 +138,8 @@ public class Pirate
 
 		s.append(" : ");
 		for (i = 0; i < listePref.length - 1; i++)
-			s.append(listePref[i]).append(" ");
-		s.append(listePref[i]);
+			s.append(listePref[i].getNom()).append(" ");
+		s.append(listePref[i].getNom());
 		return (s.toString());
 	}
 }

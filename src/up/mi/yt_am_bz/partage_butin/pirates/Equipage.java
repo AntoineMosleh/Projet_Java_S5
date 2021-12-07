@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Collection;
 
 /**
  * Classe de gestion d'un equipage de pirates
@@ -114,7 +113,31 @@ public class Equipage
 	 */
 	public void ajoutPreferencePirate(String nomP, Tresor[] pref)
 	{
+		/*Verification que la liste des objets existants est remplie*/
+		if (tresorsDispos[0] == null)
+			System.out.println("La liste des objets existants n'est pas remplie.");
+		for (Tresor t : pref)
+		/*Verification que chaque preference correspond a un objet existant*/
+			if (!tresorExiste(t))
+			{
+				System.out.println("La liste de preferences entree est incorrecte.");
+				return;
+			}
 		getPirate(nomP).ajoutPreference(pref);
+	}
+
+	/**
+	 * Verifie si un tresor est present dans la liste de tresors
+	 * existants
+	 * @param tresor le tresor a verifier
+	 * @return true si le tresor existe, false sinon
+	 */
+	private boolean tresorExiste(Tresor tresor)
+	{
+		for (Tresor t : tresorsDispos)
+			if (t.equals(tresor))
+				return (true);
+		return (false);
 	}
 
 	/**
@@ -129,6 +152,21 @@ public class Equipage
 			Tresor objet_ephemere = affectationTresors.get(getPirate(pirate1));
 			affectationTresors.replace(getPirate(pirate1), affectationTresors.get(getPirate(pirate2)));
 			affectationTresors.replace(getPirate(pirate2), objet_ephemere);
+		}
+	}
+
+	/**
+	 * Echange d'un objet entre 2 pirates
+	 * @param pirate1 nom du premier pirate
+	 * @param pirate2 nom du deuxieme pirate
+	 */
+	public void echangeObjet(Pirate pirate1, Pirate pirate2)
+	{
+		if (affectationTresors.containsKey(pirate1) && affectationTresors.containsKey(pirate2))
+		{
+			Tresor objet_ephemere = affectationTresors.get(pirate1);
+			affectationTresors.replace(pirate1, affectationTresors.get(pirate2));
+			affectationTresors.replace(pirate2, objet_ephemere);
 		}
 	}
 
@@ -329,6 +367,19 @@ public class Equipage
 		int i = getPirate(pirate1).getNumPirate();
 		int j = getPirate(pirate2).getNumPirate();
 		return matriceAdjacence[i][j];
+	}
+
+	/**
+	 * Ajout d'un nouveau tresor dans la liste des tresors existants
+	 * @param t le tresor a ajouter
+	 */
+	public void ajoutTresorDispo(Tresor t)
+	{
+		int	i = 0;
+		
+		while (tresorsDispos[i] != null && i < tresorsDispos.length)
+			i++;
+		tresorsDispos[i] = t;
 	}
 
 	/** Getter pour la liste des pirates

@@ -1,7 +1,5 @@
 package up.mi.yt_am_bz.partage_butin.pirates;
 
-import javax.print.Doc;
-
 /**
  * Classe representant un objet (tresor)
  */

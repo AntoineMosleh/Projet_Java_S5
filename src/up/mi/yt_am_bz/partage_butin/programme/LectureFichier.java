@@ -1,7 +1,11 @@
 package up.mi.yt_am_bz.partage_butin.programme;
 
-import java.io.File;
+// import java.io.File;
 import java.io.*;
+// import java.util.List;
+// import java.util.ArrayList;
+// import java.util.Arrays;
+
 import up.mi.yt_am_bz.partage_butin.pirates.*;
 
 /**
@@ -12,30 +16,34 @@ public class LectureFichier
 
     public static Equipage lecture(String file)
     {
-        BufferedReader bf =null;
+        BufferedReader bf = null;
         Pirate pirate = null;
-        int objet =null;
+        Tresor objet = null;
+        // int objet = 0;
         //List<Pirate> pirates =new ArrayList<Pirate>();
-        List<Integer> objets=new ArrayList<Integer>();
-        int nbPirates =comptagePirates(file);
+        // List<Integer> objets=new ArrayList<Integer>();
+        int nbPirates = comptagePirates(file);
+        /*Compteur permettant de connaitre l'ordre du pirate a ajouter*/
+        int ordrePirate = 0;
         Equipage equipage = new Equipage(nbPirates);
         try
         {
-            bf = new BufferedReader(file);
+            bf = new BufferedReader(new FileReader(file));
             String line;
             while((line=bf.readLine())!=null)
             {
                 if (line.startsWith("pirate"))
                 {
-                    pirate=parserPirate(line, nbPirates);
+                    pirate = parserPirate(line, nbPirates, ordrePirate++);
                     //pirates.add(pirate);
                     //ameliorer avec nouvelle methode equipage.ajoutPirate()
-                    equipage.getListePirate().add(pirate);
+                    equipage.ajoutPirate(pirate);
                 }
                 if (line.startsWith("objet"))
                 {
-                    objet=parserObjet(line);
-                    objets.add(objet);
+                    objet = parserObjet(line);
+                    equipage.ajoutTresorDispo(objet);
+                    // objets.add(objet);
                 }
                 if (line.startsWith("deteste"))
                 {
@@ -46,6 +54,7 @@ public class LectureFichier
                     parserPreferences(line, nbPirates, equipage);
                 }
             }
+            bf.close();
         }
         catch(FileNotFoundException e)
         {
@@ -58,7 +67,6 @@ public class LectureFichier
 			System.exit(1);
         }
         return equipage;
-        bf.close();
     }
 
 
@@ -68,7 +76,7 @@ public class LectureFichier
         BufferedReader bf=null;
         try
         {
-            bf = new BufferedReader(file);
+            bf = new BufferedReader(new FileReader(file));
             String line;
             while((line=bf.readLine())!=null)
             {
@@ -77,6 +85,7 @@ public class LectureFichier
                     nombresPirates++;
                 }
             }
+            bf.close();
         }
         catch(FileNotFoundException e)
         {
@@ -88,47 +97,61 @@ public class LectureFichier
             System.err.println(e.getMessage());
 			System.exit(1);
         }
-        bf.close();
         return nombresPirates;
     }
 
 
-    private static Pirate parserPirate(String line,int nbPirates)
+    private static Pirate parserPirate(String line,int nbPirates, int ordrePirate)
     {
-        String infos = line.substring("pirate(".length(), line.length() - 1);
-		String[] infosTab = infos.split(",");
-        char nomP =infosTab[0].charAt(0);
-		return new Pirate(nomP,nbPirates);
+        String infos = line.substring("pirate(".length(), line.length() - 2);
+		// String[] infosTab = infos.split(",");
+        // char nomP =infosTab[0].charAt(0);
+        // String nomP = infos;
+		return new Pirate(infos, nbPirates, ordrePirate);
     }
 
-    private static Integer parserObjet(String line)
+    private static Tresor parserObjet(String line)
     {
-        String infos = line.substring("objet(".length(), line.length() - 1);
-        infos=infos.replace("o", "");
-		return Integer.parseInt(infos);
-
+        String infos = line.substring("objet(".length(), line.length() - 2);
+        // infos=infos.replace("o", "");
+		// return Integer.parseInt(infos);
+		System.out.println("Objet : " + infos);
+        return (new Tresor(infos));
     }
 
     private static void parserDeteste(String line,Equipage e)
     {
         String infos = line.substring("deteste(".length(), line.length() - 1);
 		String[] infosTab = infos.split(",");
-        char nomP1 =infosTab[0].charAt(0);
-        char nomP2 =infosTab[1].charAt(0);
-        e.ajouterRelation2(nomp1, nomp2);
+        String nomP1 =infosTab[0];
+        String nomP2 =infosTab[1];
+		System.out.println("Pirates qui se detestent : " + nomP1 + ", " + nomP2);
+        // e.ajouterRelation(nomP1, nomP2);
     }
 
     private static void parserPreferences(String line,int nbPirates,Equipage e)
     {
-        String infos = line.substring("preferences(".length(), line.length() - 1);
-        infos=infos.replace("o", "");
+        String infos = line.substring("preferences(".length(), line.length() - 2);
+        // infos=infos.replace("o", "");
 		String[] infosTab = infos.split(",");
-        char nomP =infosTab[0].charAt(0);
-        int[] objets = new int[nbPirates];
-        for(int i=1;i<infosTab.length;i++)
+        String nomP = infosTab[0];
+        Tresor[] objets = new Tresor[nbPirates];
+
+        /*Verification que la ligne contient le bon nombre d'objets*/
+        if (infosTab.length <= nbPirates)
         {
-            objets[i-1]=Integer.parseInt(infosTab[i]);
+            System.out.println("Erreur du nombre d'objets dans le fichier.");
+            return;
         }
-        e.ajoutPreferencePirate(nomP,objets);
+        // String[] objets = Arrays.copyOfRange(infosTab, 1, infosTab.length);
+        for (int i = 0; i + 1 < infosTab.length; i++)
+            objets[i] = new Tresor(infosTab[i + 1]);
+        e.ajoutPreferencePirate(nomP, objets);
+        // String[] objets = new String[nbPirates];
+        // for(int i = 1; i < infosTab.length; i++)
+        // {
+        //     objets[i-1] = infosTab[i];
+        // }
+        // e.ajoutPreferencePirate(nomP,objets);
     }
 }
