@@ -6,12 +6,10 @@ DEADLINE: <2021-12-17 Fri>
 CLOSED: [2021-12-06 Mon 09:46]
 ** DONE omdifier noms objets (rendre general)
 CLOSED: [2021-12-06 Mon 09:46]
-** TODO changer constructeur equipage ? (Si on ne connait pas le nbPirates, c'est la merde)
-** TODO Changer hashmap affectation dans equipage
-** TODO Ajouter attribut numero dans Pirate => le gerer dans parsing etc
-** TODO Quand on ajoute un pirate a l'equipage, penser a ajouter le nbPirates de chaque pirate
-** TODO Ajouter classe Tresor
-** TODO Liste des objets existants dans equipage
+** DONE Changer hashmap affectation dans equipage
+** DONE Ajouter attribut numero dans Pirate => le gerer dans parsing etc
+** DONE Ajouter classe Tresor
+** DONE Liste des objets existants dans equipage
 
 ** TODO Corriger erreurs du rendu 1 [50%]
 **** DONE Ajouter packages
@@ -19,7 +17,7 @@ CLOSED: [2021-12-05 Sun 10:36]
 **** DONE Enlever commentaires inline
 CLOSED: [2021-12-05 Sun 10:23]
 **** TODO Verifier warnings (?)
-**** TODO (Nom de pirate incorrect -> erreur) ?
+**** TODO Probleme calcul de cout
 ** TODO Menu (Refaire un main)
 *** TODO Parsing fichier => Antoine (Nouvelle classe)
 *** TODO Implementer algo approximation (resolution automatique) (classe Equipage) => Bastien
