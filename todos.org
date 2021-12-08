@@ -35,9 +35,13 @@ A est jaloux de B ssi:
 ** TODO Menu (Refaire un main)
 *** DONE Parsing fichier => Antoine (Nouvelle classe)
 *** TODO Gerer toutes les erreurs possibles de parsing
-*** TODO Implementer algo approximation (resolution automatique) (classe Equipage) => Bastien
-*** TODO Gerer resolution automatique dans le menu
-*** TODO Resolution manuelle (Ajouter gestion des erreurs dans code existant)
+*** DONE Implementer algo approximation (resolution automatique) (classe Equipage) => Bastien
+CLOSED: [2021-12-08 Wed 12:51]
+*** DONE Gerer resolution automatique dans le menu
+CLOSED: [2021-12-08 Wed 12:51]
+*** DONE Resolution manuelle (Ajouter gestion des erreurs dans code existant)
+CLOSED: [2021-12-08 Wed 13:24]
+*** TODO Ameliorer algo approximation (Ne pas faire la meme solution deux fois)
 *** TODO Sauvegarde
 *** TODO Chercher toutes les erreurs => Yvan
 *** TODO GERER TOUTES ERREURS POSSIBLES

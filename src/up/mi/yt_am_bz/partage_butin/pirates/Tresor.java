@@ -58,4 +58,10 @@ public class Tresor
 		result = seed * result + nom.hashCode();
 		return (result);
 	}
+
+	@Override
+	public String toString()
+	{
+		return (nom);
+	}
 }

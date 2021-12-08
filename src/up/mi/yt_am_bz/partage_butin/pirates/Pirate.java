@@ -149,13 +149,16 @@ public class Pirate
 	@Override
 	public String toString()
 	{
-		int             i;
+		int             i = 0;
 		StringBuffer    s = new StringBuffer("Pirate ").append(nomPirate);
 
 		s.append(" : ");
-		for (i = 0; i < listePref.length - 1; i++)
-			s.append(listePref[i].getNom()).append(" ");
-		s.append(listePref[i].getNom());
+		if (listePref[0] != null)
+		{
+			for (i = 0; i < listePref.length - 1; i++)
+				s.append(listePref[i].getNom()).append(" ");
+			s.append(listePref[i].getNom());
+		}
 		return (s.toString());
 	}
 }

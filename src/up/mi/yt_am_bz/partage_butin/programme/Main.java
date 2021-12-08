@@ -1,13 +1,12 @@
 package up.mi.yt_am_bz.partage_butin.programme;
 
 import java.io.File;
-import java.util.List;
 import java.util.Scanner;
 import up.mi.yt_am_bz.partage_butin.pirates.*;
 
 public class Main 
 {
-    public static void main(String[] args)
+	public static void main(String[] args)
     {
         String		fichier;
         Equipage	equipage;
@@ -18,7 +17,6 @@ public class Main
 		else
 			fichier = choixFichier(sc);
 		equipage = LectureFichier.lecture(fichier);
-        // menu1(sc, equipage, nbPirates);
 		System.out.println("L'equipage a bien ete forme !");
         menu(sc, equipage);
         sc.close();
@@ -48,7 +46,8 @@ public class Main
 			System.out.println("\n****** MENU ******");
 			System.out.println("1 Resolution automatique");
 			System.out.println("2 Resolution manuelle");
-			System.out.println("3 Sauvegarder");
+			System.out.println("3 Afficher la solution actuelle");
+			System.out.println("4 Sauvegarder");
 			System.out.println("0 Fin\n");
 			System.out.println("Que voulez-vous faire ?");
 			ligne = sc.nextLine();
@@ -61,11 +60,18 @@ public class Main
 						System.out.println("Au revoir !");
 						break;
 					case 1:
+						e.executeApproximationSolution();
+						e.afficherSolution();
+						sc.nextLine();
 						break;
 					case 2:
 						menuResolutionManuelle(sc, e);
 						break;
 					case 3:
+						e.afficherSolution();
+						sc.nextLine();
+						break;
+					case 4:
 						break;
 					default:
 						System.out.println("Le choix " + choix + " est incorrect. (appuyez sur entree)");
@@ -89,78 +95,78 @@ public class Main
      */
     private static void menuResolutionManuelle(Scanner sc, Equipage e)
 	{
-		int			choix;
+		int		choix = -1;
+		String	ligne;
 
-        // e.solutionNaive();
+		if (!e.solutionExiste())
+        	e.executeSolutionNaive();
 		do
 		{
-            // e.afficherSolution();
+			System.out.println(e);
+            e.afficherSolution();
+			sc.nextLine();
             System.out.println("\n****** Resolution Manuelle ******");
 			System.out.println("1 echanger objet");
 			System.out.println("2 afficher le cout");
 			System.out.println("3 Fin");
             System.out.println("\nQue voulez-vous faire ?");
-			choix = sc.nextInt();
-            sc.nextLine();
-			switch(choix)
+            ligne = sc.nextLine();
+			try
 			{
-				case 1:
-                    echangeObjets(e, sc);
-					break;
-				case 2:
-                    e.afficherCout();
-					break;
-				case 3:
-                    System.out.println("Au revoir !");
-					break;
-				default:
-					System.out.println("Le choix " + choix + " n'existe pas.");
-					break;
+				choix = Integer.parseInt(ligne);
+				switch(choix)
+				{
+					case 1:
+						echangeObjets(e, sc);
+						break;
+					case 2:
+						e.afficherCout();
+						break;
+					case 3:
+						System.out.println("Au revoir !");
+						break;
+					default:
+						System.out.println("Le choix " + choix + " n'existe pas.");
+						break;
+				}
+			}
+			catch(NumberFormatException exception)
+			{
+				System.out.println("\"" + ligne + "\" est un choix invalide.");
 			}
 		}
 		while (choix != 3);
 	}
 
     /**
-     * Méthode intermediare du menu2 permettant l'échange des objets de deux pirates
-     *@param équipage l'equipage dans lequel effectuer l'échange
+     * Methode intermediare du menuResolutionManuelle permettant l'echange des objets de deux pirates
+     *@param équipage l'equipage dans lequel effectuer l'echange
      *@param sc le scanner du menu principal
      */
 	private static void echangeObjets(Equipage equipage, Scanner sc)
 	{
-		Pirate    pirate1 = null;
-		Pirate    pirate2 = null;
-        // boolean verif;
+		Pirate		pirate1 = null;
+		Pirate		pirate2 = null;
+		String		nom;
 
-        // pirate1 = ' ';
-        // pirate2 = ' ';
-        do
+		do
         {
             System.out.println("Echange des objets entre deux pirates.");
             System.out.print("Premier pirate pour l'echange : ");
-            pirate1 = equipage.getPirate(sc.next());
+			nom = sc.nextLine();
+            pirate1 = equipage.getPirate(nom);
             if (pirate1 == null)
-                System.out.println("Le pirate " + pirate1 + " n'existe pas.");
+                System.out.println("Le pirate " + nom + " n'existe pas.");
             else
             {
                 System.out.print("Second pirate pour l'echange : ");
-                pirate2 = equipage.getPirate(sc.next());
+				nom = sc.nextLine();
+                pirate2 = equipage.getPirate(nom);
+				if (pirate2 == null)
+                	System.out.println("Le pirate " + nom + " n'existe pas.");
             }
         }
         while (pirate1 == null || pirate2 == null);
         equipage.echangeObjet(pirate1, pirate2);
-        //     pirate1 = sc.next();
-        //     if (!equipage.containList(pirate1))
-        //         System.out.println("Le pirate " + pirate1 + " n'existe pas.");
-        //     else
-        //     {
-        //         System.out.print("Second pirate pour l'echange : ");
-        //         pirate2 = sc.next().charAt(0);
-        //     }
-        //     sc.nextLine();
-        //     verif = equipage.containList(pirate1) && equipage.containList(pirate2);
-        // }
-        // while (!verif);
-        // equipage.echangeObjet(pirate1, pirate2);
 	}
 }

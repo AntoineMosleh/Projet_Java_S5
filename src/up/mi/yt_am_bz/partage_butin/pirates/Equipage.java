@@ -133,19 +133,30 @@ public class Equipage
 	}
 
 	/**
-	 * Methode de resolution naive du probleme
-	 *(Chaque pirate obtient sa premiere preference non deja prise) */
-	public void	solutionNaive()
+	 * Execution et enregistrement dans l'equipage de la solution naive
+	 */
+	public void executeSolutionNaive()
+	{
+		this.affectationTresors = solutionNaive();
+	}
+
+	/**
+	 * Retourne la solution naive correspondant a l'equipage
+	 * @return la hashMap de la solution naive
+	 */
+	private HashMap<Pirate, Tresor> solutionNaive()
 	{
 		int	i;
+		HashMap<Pirate, Tresor> solution = new HashMap<>(nbPirates);
 
 		for (Pirate p : listePirates)
 		{
 			i = 0;
-			while (i < nbPirates && affectationTresors.containsValue(p.getListePref()[i]))
+			while (i < nbPirates && solution.containsValue(p.getListePref()[i]))
 				i++;
-			affectationTresors.put(p,p.getListePref()[i]);
+			solution.put(p,p.getListePref()[i]);
 		}
+		return (solution);
 	}
 
 	/**
@@ -154,20 +165,98 @@ public class Equipage
 	public void afficherSolution()
 	{
 		if (affectationTresors.isEmpty())
-			System.out.println("Pas encore de solution pour l'equipage.");
+			System.out.println("\nPas encore de solution pour l'equipage.");
 		else
 		{
-			System.out.println("Solution actuelle : ");
+			System.out.println("\nSolution actuelle : ");
 			for (Pirate p : listePirates)
-				System.out.println("Pirate " + p.getNomPirate() + " : " + affectationTresors.get(p).getNom());
+				System.out.println("Pirate " + p.getNomPirate() + " : " + affectationTresors.get(p));
+			afficherCout();
 		}
 	}
 	
 	/**
-	 * Calcule le cout de la solution actuelle
+	 * Execution et enregistrement dans l'equipage de la solution approximative
+	 */
+	public void executeApproximationSolution()
+	{
+		final int nbEssais = 100;
+
+		affectationTresors = approximationSolution(nbEssais);
+	}
+
+	/**
+	 * Algorithme d'approximation (naif)
+	 * @param nbEssais entier correspondant au nombre d'essais a faire
+	 * @return la Map correspondant a la trouvee
+	 */
+	private HashMap<Pirate, Tresor> approximationSolution(int nbEssais)
+	{
+		int						i;
+		Pirate					p1;
+		Pirate					p2;
+		int						randomNum;
+		int						randomNum2;
+		HashMap<Pirate, Tresor>	bestSolution = solutionNaive();
+		HashMap<Pirate, Tresor>	solutionTest;
+
+		for (i = 0; i < nbEssais; i++)
+		{
+			
+			randomNum = (int) ((1 + Math.random() * listePirates.size()) - 1);
+			p1 = getPirate(randomNum);
+			do
+			{
+				randomNum2 = (int) ((1 + Math.random() * listePirates.size()) - 1);
+			}
+			while (randomNum == randomNum2);
+			p2 = getPirate(randomNum2);
+			solutionTest = (HashMap<Pirate,Tresor>)copyMap(bestSolution);
+			swapValueHashMap(solutionTest, p1, p2);
+			if (calculCout(bestSolution) > calculCout(solutionTest))
+				bestSolution = solutionTest;
+		}
+		return (bestSolution);
+	}
+
+	/**
+	 * Echange les valeurs de deux cles dans une Map
+	 * @param <T> le type des cles
+	 * @param <U> le type des valeurs
+	 * @param map la Map ou effectuer l'echange
+	 * @param key1 la premiere cle
+	 * @param key2 la deuxieme cle
+	 */
+	private <T extends Object, U extends Object> void swapValueHashMap(HashMap<T,U> map, T key1, T key2)
+	{
+		U tmp = map.get(key1);
+
+		map.replace(key1, map.get(key1), map.get(key2));
+		map.replace(key2, map.get(key2), tmp);
+	}
+
+	/**
+	 * Effectue et retourne la copie d'une Map
+	 * @param <T> le type des cles
+	 * @param <U> le type des valeurs
+	 * @param map la Map a copier
+	 * @return la copie de la Map
+	 */
+	private <T extends Object, U extends Object> Map<T,U> copyMap(Map<T,U> map)
+	{
+		Map<T,U> newMap = new HashMap<>(map.size());
+
+		for (T t : map.keySet())
+			newMap.put(t, map.get(t));
+		return (newMap);
+	}
+
+	/**
+	 * Calcule le cout d'une solution passee en argument
+	 * @param solution proposee
 	 * @return
 	 */
-	private int calculCout()
+	private int calculCout(Map<Pirate, Tresor> solution)
 	{
 		/*Cout total*/
 		int			cout = 0;
@@ -188,7 +277,7 @@ public class Equipage
 		/*parcours de tous les pirates*/
 		for (Pirate p1 : listePirates)
 		{
-			tp1 = affectationTresors.get(p1);
+			tp1 = solution.get(p1);
 			tp1p1 = p1.getIndexPref(tp1);
 			/*Si le pirate n'a pas son objet prefere*/
 			if (tp1p1 > 0)
@@ -201,13 +290,13 @@ public class Equipage
 					if (matriceAdjacence[i][j])
 					{
 						p2 = getPirate(j);
-						tp2 = affectationTresors.get(p2);
+						tp2 = solution.get(p2);
 						tp2p1 = p1.getIndexPref(tp2);
 						/*Si le pirate 2 a eu un objet que le pirate 1 aurait prefere*/
 						if (tp1p1 > tp2p1)
 						{
 							cout++;
-							System.out.println("\n" + p1.getNomPirate() + " est jaloux de " + p2.getNomPirate());
+							System.out.println(p1.getNomPirate() + " est jaloux de " + p2.getNomPirate());
 						}
 					}
 				}
@@ -221,14 +310,14 @@ public class Equipage
 	 */
 	public void afficherCout()
 	{
-		int	cout = calculCout();
+		int	cout = calculCout(affectationTresors);
 		System.out.println("\nLa solution actuelle a un cout de " + cout + "\n");
 	}
 	
 	/**
 	 * Affichage de la matrice d'adjacence (principalement pour les tests)
 	 */
-	public void afficherRelations()
+	public void afficherMatrice()
 	{
 		int	i;
 		int	j;
@@ -255,15 +344,6 @@ public class Equipage
 		if (getPirate(nom) != null)
 			return (true);
 		return (false);
-		// ArrayList<Character> listNom;
-		// listNom = new ArrayList<Character>();
-		// for (int i=0; i<listePirates.size(); i++)
-		// {
-		// 	listNom.add(listePirates.get(i).getNomPirate());
-		// }
-		// if(listNom.contains(nom))
-		// 	return true;
-		// return false;
 	}
 
 	/**
@@ -276,17 +356,6 @@ public class Equipage
 			if (p.listIsVide())
 				return (false);
 		return (true);
-		// boolean verificationFinal=true;
-		// boolean verification;
-		// for(int i=0;i<listePirates.size();i++)
-		// {
-		// 	verification = listePirates.get(i).listIsVide();
-		// 	if(verification==true)
-		// 	{
-		// 		verificationFinal=false;
-		// 	}
-		// }
-		// return verificationFinal;
 	}
 
 	/** Methode de verification qu'une relation de jalousie existe deja entre
@@ -355,6 +424,11 @@ public class Equipage
 		return (null);
 	}
 	
+	public boolean solutionExiste()
+	{
+		return (!affectationTresors.isEmpty());
+	}
+
     /**
 	 * Methode permettant d'afficher les noms des membres de l'equipage
 	 * @return 
@@ -373,18 +447,18 @@ public class Equipage
 	@Override
 	public String toString()
 	{
-		StringBuffer	s = new StringBuffer("Composition de l'equipage et leurs preferences respectives : \n");
+		StringBuffer	s = new StringBuffer("\nComposition de l'equipage et leurs preferences respectives : \n");
 
 		for (Pirate p : listePirates)
 			s.append(p.toString()).append("\n");
-		s.append("Relations : \n");
+		s.append("\nRelations : \n");
 		for (int i = 0; i < matriceAdjacence.length; i++)
 			for (int j = i + 1; j < matriceAdjacence.length; j++)
 				if (relationExiste(getPirate(i).getNomPirate(), getPirate(j).getNomPirate()))
 				{
 					s.append("Pirate ").append(getPirate(i).getNomPirate())
 					.append(" et Pirate ").append(getPirate(j).getNomPirate())
-					.append(" se detestent.");
+					.append(" se detestent.\n");
 				}
 		return (s.toString());
 	}
