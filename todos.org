@@ -41,7 +41,7 @@ CLOSED: [2021-12-08 Wed 12:51]
 CLOSED: [2021-12-08 Wed 12:51]
 *** DONE Resolution manuelle (Ajouter gestion des erreurs dans code existant)
 CLOSED: [2021-12-08 Wed 13:24]
-*** TODO Ameliorer algo approximation (Ne pas faire la meme solution deux fois)
+*** TODO Ameliorer algo approximation (Ne pas faire la meme solution deux fois par exemple)
 *** TODO Sauvegarde
 *** TODO Chercher toutes les erreurs => Yvan
 *** TODO GERER TOUTES ERREURS POSSIBLES
