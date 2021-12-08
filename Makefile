@@ -29,7 +29,7 @@ $(NAME):		$(DIR_OUT)
 
 run:			$(NAME)
 				@echo "$(GREEN)Lancement de $(NAME)$(END)"
-				@java -cp $(DIR_OUT) $(NAME) $(ARGUMENTS)
+				@java -cp $(DIR_OUT) $(NAME)
 
 $(DIR_OUT):
 				@echo "$(GREEN)Création du dossier $(DIR_OUT)$(END)"

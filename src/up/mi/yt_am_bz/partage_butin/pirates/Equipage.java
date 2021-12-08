@@ -377,6 +377,15 @@ public class Equipage
 
 		for (Pirate p : listePirates)
 			s.append(p.toString()).append("\n");
+		s.append("Relations : \n");
+		for (int i = 0; i < matriceAdjacence.length; i++)
+			for (int j = i + 1; j < matriceAdjacence.length; j++)
+				if (relationExiste(getPirate(i).getNomPirate(), getPirate(j).getNomPirate()))
+				{
+					s.append("Pirate ").append(getPirate(i).getNomPirate())
+					.append(" et Pirate ").append(getPirate(j).getNomPirate())
+					.append(" se detestent.");
+				}
 		return (s.toString());
 	}
 }

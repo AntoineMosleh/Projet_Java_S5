@@ -150,7 +150,7 @@ public class Pirate
 	public String toString()
 	{
 		int             i;
-		StringBuffer    s = new StringBuffer(nomPirate);
+		StringBuffer    s = new StringBuffer("Pirate ").append(nomPirate);
 
 		s.append(" : ");
 		for (i = 0; i < listePref.length - 1; i++)
