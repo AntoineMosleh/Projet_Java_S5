@@ -37,4 +37,5 @@ A est jaloux de B ssi:
 *** DONE Ameliorer algo approximation (Ne pas faire la meme solution deux fois par exemple)
 *** DONE Sauvegarde
 *** TODO GERER TOUTES ERREURS POSSIBLES
+*** TODO Finir la documentation de toutes les methodes et classes
 ** TODO Rendre projet
