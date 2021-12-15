@@ -62,6 +62,7 @@ public class Main
 					case 1:
 						e.executeApproximationSolution();
 						e.afficherSolution();
+						System.out.println("(appuyez sur entree)");
 						sc.nextLine();
 						break;
 					case 2:
@@ -69,6 +70,7 @@ public class Main
 						break;
 					case 3:
 						e.afficherSolution();
+						System.out.println("(appuyez sur entree)");
 						sc.nextLine();
 						break;
 					case 4:
@@ -81,7 +83,8 @@ public class Main
 			}
 			catch(NumberFormatException exception)
 			{
-				System.out.println("\"" + ligne + "\" est un choix invalide.");
+				System.out.println("\"" + ligne + "\" est un choix invalide. (appuyez sur entree)");
+				sc.nextLine();
 			}
 		}
 		while (choix != 0);
@@ -104,6 +107,7 @@ public class Main
 		{
 			System.out.println(e);
             e.afficherSolution();
+			System.out.println("(appuyez sur entree)");
 			sc.nextLine();
             System.out.println("\n****** Resolution Manuelle ******");
 			System.out.println("1 echanger objet");
@@ -127,12 +131,14 @@ public class Main
 						break;
 					default:
 						System.out.println("Le choix " + choix + " n'existe pas.");
+						sc.nextLine();
 						break;
 				}
 			}
 			catch(NumberFormatException exception)
 			{
-				System.out.println("\"" + ligne + "\" est un choix invalide.");
+				System.out.println("\"" + ligne + "\" est un choix invalide. (appuyez sur entree)");
+				sc.nextLine();
 			}
 		}
 		while (choix != 3);
