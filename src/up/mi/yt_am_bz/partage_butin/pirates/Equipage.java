@@ -171,6 +171,7 @@ public class Equipage
 			System.out.println("\nSolution actuelle : ");
 			for (Pirate p : listePirates)
 				System.out.println("Pirate " + p.getNomPirate() + " : " + affectationTresors.get(p));
+			System.out.println();
 			afficherCout();
 		}
 	}
@@ -180,9 +181,22 @@ public class Equipage
 	 */
 	public void executeApproximationSolution()
 	{
-		final int nbEssais = 100;
+		final long nbEssais = 100;
 
 		affectationTresors = approximationSolution(nbEssais);
+	}
+
+	/**
+	 * Calcul de la factorielle d'un nombre
+	 * @param n le nombre
+	 * @return le resultat de la factorielle de n
+	 *
+	 */
+	private long fact(int n)
+	{
+		if (n <= 2)
+			return (n);
+		return (n * fact(n - 1));
 	}
 
 	/**
@@ -190,30 +204,61 @@ public class Equipage
 	 * @param nbEssais entier correspondant au nombre d'essais a faire
 	 * @return la Map correspondant a la trouvee
 	 */
-	private HashMap<Pirate, Tresor> approximationSolution(int nbEssais)
+	private HashMap<Pirate, Tresor> approximationSolution(long nbEssais)
 	{
-		int						i;
-		Pirate					p1;
-		Pirate					p2;
-		int						randomNum;
-		int						randomNum2;
-		HashMap<Pirate, Tresor>	bestSolution = solutionNaive();
-		HashMap<Pirate, Tresor>	solutionTest;
-
+		/*Compteurs pour le nombre d'essais*/
+		long								i;
+		long								j;
+		/*Pirates pour lesquels les tresors sont echanges*/
+		Pirate								p1;
+		Pirate								p2;
+		/*Numeros aleatoires pour le choix des pirates a inverser*/
+		int									randomNum;
+		int									randomNum2;
+		/*Le nombre de possibilites pour l'equipage*/
+		long								nbPossibilites = -1;
+		/*Liste contenant toutes les solutions essayees*/
+		ArrayList<HashMap<Pirate,Tresor>>	listSolutions = new ArrayList<>();
+		/*Meilleure solution trouvee*/
+		HashMap<Pirate, Tresor>				bestSolution = solutionNaive();
+		/*Solution comparee a la meilleure solutin trouvee*/
+		HashMap<Pirate, Tresor>				solutionTest;
+		/*Au dessus de 20, le resultat de la factorielle ne rentre plus dans un long*/
+		if (nbPirates <= 20)
+			nbPossibilites = fact(nbPirates);
+		/*Verification que le nombre d'essais ne depasse pas le nombre de possibilites.
+		 *Si c'est le cas alors on le reduit au nombre de possibilites (sinon il y aura une boucle infinie)*/
+		if (nbEssais > nbPossibilites && nbPossibilites != -1)
+			nbEssais = nbPossibilites;
+		/*Boucle testant nbEssais possibilites*/
 		for (i = 0; i < nbEssais; i++)
 		{
-			
-			randomNum = (int) ((1 + Math.random() * listePirates.size()) - 1);
-			p1 = getPirate(randomNum);
+			/*Compteur pour eviter une boucle infinie dans le cas ou les nombres aleatoires ne permettent
+			 *pas dans un temps raisonnable de trouver une nouvelle solution */
+			j = 0;
+			/*Creation d'une solution pas encore essayee*/
 			do
 			{
-				randomNum2 = (int) ((1 + Math.random() * listePirates.size()) - 1);
+				/*Choix d'un pirate selon son numero choisi aleatoirement*/
+				randomNum = (int) ((1 + Math.random() * listePirates.size()) - 1);
+				p1 = getPirate(randomNum);
+				/*Choix du second pirate (different du premier)*/
+				do
+				{
+					randomNum2 = (int) ((1 + Math.random() * listePirates.size()) - 1);
+				}
+				while (randomNum == randomNum2);
+				p2 = getPirate(randomNum2);
+				/*Echange des tresors des deux pirates choisis*/
+				solutionTest = (HashMap<Pirate,Tresor>)copyMap(bestSolution);
+				swapValueHashMap(solutionTest, p1, p2);
 			}
-			while (randomNum == randomNum2);
-			p2 = getPirate(randomNum2);
-			solutionTest = (HashMap<Pirate,Tresor>)copyMap(bestSolution);
-			swapValueHashMap(solutionTest, p1, p2);
-			if (calculCout(bestSolution) > calculCout(solutionTest))
+			while (listSolutions.contains(solutionTest) && j++ < nbEssais);
+			/*Ajout de la nouvelle solution dans la liste des solutions testees*/
+			listSolutions.add(solutionTest);
+			/*Si la nouvelle solution a un cout plus faible que la meilleure solution,
+			 *alors elle devient la meilleure solution */
+			if (calculCout(bestSolution,false) > calculCout(solutionTest,false))
 				bestSolution = solutionTest;
 		}
 		return (bestSolution);
@@ -256,7 +301,7 @@ public class Equipage
 	 * @param solution proposee
 	 * @return
 	 */
-	private int calculCout(Map<Pirate, Tresor> solution)
+	private int calculCout(Map<Pirate, Tresor> solution, boolean afficherJalousies)
 	{
 		/*Cout total*/
 		int			cout = 0;
@@ -296,7 +341,8 @@ public class Equipage
 						if (tp1p1 > tp2p1)
 						{
 							cout++;
-							System.out.println(p1.getNomPirate() + " est jaloux de " + p2.getNomPirate());
+							if (afficherJalousies)
+								System.out.println(p1.getNomPirate() + " est jaloux de " + p2.getNomPirate());
 						}
 					}
 				}
@@ -310,7 +356,7 @@ public class Equipage
 	 */
 	public void afficherCout()
 	{
-		int	cout = calculCout(affectationTresors);
+		int	cout = calculCout(affectationTresors,true);
 		System.out.println("\nLa solution actuelle a un cout de " + cout + "\n");
 	}
 	
