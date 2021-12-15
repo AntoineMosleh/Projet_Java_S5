@@ -474,7 +474,20 @@ public class Equipage
 				return (p);
 		return (null);
 	}
-	
+
+	/**
+	 * Getter du nombre de pirates
+	 * @return
+	 */
+	public int getNbPirates()
+	{
+		return this.nbPirates;
+	}
+
+	/**
+	 * Indique si une solution a deja ete trouvee
+	 * @return true si une solution existe, false sinon
+	 */
 	public boolean solutionExiste()
 	{
 		return (!affectationTresors.isEmpty());

@@ -74,6 +74,10 @@ public class Main
 						sc.nextLine();
 						break;
 					case 4:
+						if (e.solutionExiste())
+							menuSauvegarde(e,sc);
+						else
+							System.out.println("Il n'y a pas encore de solution.");
 						break;
 					default:
 						System.out.println("Le choix " + choix + " est incorrect. (appuyez sur entree)");
@@ -89,6 +93,17 @@ public class Main
 		}
 		while (choix != 0);
 
+	}
+
+	private static void menuSauvegarde(Equipage e, Scanner sc)
+	{
+		String	fileName;
+
+		System.out.println("\n****** Menu de sauvegarde ******");
+		System.out.println("Dans quel fichier enregistrer la solution ?");
+		fileName = sc.nextLine();
+		SauvegardeFichier.sauvegarder(e, fileName);
+		sc.nextLine();
 	}
 
     /**

@@ -3,9 +3,7 @@
 * TODO Rendu 2
 DEADLINE: <2021-12-17 Fri>
 ** DONE modifier noms pirates (rendre general)
-CLOSED: [2021-12-06 Mon 09:46]
 ** DONE omdifier noms objets (rendre general)
-CLOSED: [2021-12-06 Mon 09:46]
 ** DONE Changer hashmap affectation dans equipage
 ** DONE Ajouter attribut numero dans Pirate => le gerer dans parsing etc
 ** DONE Ajouter classe Tresor
@@ -13,9 +11,7 @@ CLOSED: [2021-12-06 Mon 09:46]
 
 ** TODO Corriger erreurs du rendu 1 [50%]
 **** DONE Ajouter packages
-CLOSED: [2021-12-05 Sun 10:36]
 **** DONE Enlever commentaires inline
-CLOSED: [2021-12-05 Sun 10:23]
 **** TODO Verifier warnings (?)
 **** DONE Probleme calcul de cout
 **** DONE Resolution naive a corriger
@@ -34,15 +30,11 @@ A est jaloux de B ssi:
 
 ** TODO Menu (Refaire un main)
 *** DONE Parsing fichier => Antoine (Nouvelle classe)
-*** TODO Gerer toutes les erreurs possibles de parsing
+*** DONE Gerer toutes les erreurs possibles de parsing
 *** DONE Implementer algo approximation (resolution automatique) (classe Equipage) => Bastien
-CLOSED: [2021-12-08 Wed 12:51]
 *** DONE Gerer resolution automatique dans le menu
-CLOSED: [2021-12-08 Wed 12:51]
 *** DONE Resolution manuelle (Ajouter gestion des erreurs dans code existant)
-CLOSED: [2021-12-08 Wed 13:24]
-*** TODO Ameliorer algo approximation (Ne pas faire la meme solution deux fois par exemple)
-*** TODO Sauvegarde
-*** TODO Chercher toutes les erreurs => Yvan
+*** DONE Ameliorer algo approximation (Ne pas faire la meme solution deux fois par exemple)
+*** DONE Sauvegarde
 *** TODO GERER TOUTES ERREURS POSSIBLES
 ** TODO Rendre projet
