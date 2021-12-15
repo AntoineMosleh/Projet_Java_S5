@@ -398,6 +398,11 @@ public class Equipage
 		return matriceAdjacence;
 	}
 
+	public Map<Pirate,Tresor> getAffectationTresor()
+	{
+		return this.affectationTresors;
+	}
+
 	/**
 	 * Getter pour un pirate en fonction de son nom
 	 * @param nom le nom du pirate recherche

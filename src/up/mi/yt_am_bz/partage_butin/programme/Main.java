@@ -169,4 +169,12 @@ public class Main
         while (pirate1 == null || pirate2 == null);
         equipage.echangeObjet(pirate1, pirate2);
 	}
+
+	public static void sauvegarder(Equipage e,Scanner sc)
+	{
+		sc.nextLine();
+		System.out.print("Quel est le chemin vers le fichier de sauvegarde ? ");
+		String file = sc.nextLine();
+		SauvegardeFichier.sauvegarder(e, file);
+	}
 }
