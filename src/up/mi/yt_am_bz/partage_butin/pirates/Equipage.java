@@ -255,7 +255,8 @@ public class Equipage
 			}
 			while (listSolutions.contains(solutionTest) && j++ < nbEssais);
 			/*Ajout de la nouvelle solution dans la liste des solutions testees*/
-			listSolutions.add(solutionTest);
+			if (!listSolutions.contains(solutionTest))
+				listSolutions.add(solutionTest);
 			/*Si la nouvelle solution a un cout plus faible que la meilleure solution,
 			 *alors elle devient la meilleure solution */
 			if (calculCout(bestSolution,false) > calculCout(solutionTest,false))

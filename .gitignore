@@ -58,3 +58,6 @@ Temporary Items
 
 # Documentation folder
 documentation
+
+# tex documents
+*.tex

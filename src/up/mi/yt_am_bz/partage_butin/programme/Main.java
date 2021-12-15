@@ -31,7 +31,7 @@ public class Main
 			System.out.print("Veuillez entrer le nom du fichier : ");
 			fichier = new File(sc.nextLine());
 		}
-		while (!fichier.exists());
+		while (!fichier.exists() || fichier.isDirectory());
 		return fichier.getPath();
 	}
 
