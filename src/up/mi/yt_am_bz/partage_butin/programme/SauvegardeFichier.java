@@ -27,7 +27,7 @@ public class SauvegardeFichier
             // printW.println(pirate.getNomPirate() + " : " + tresor.getNom());
             pirate = e.getPirate(i);
 			tresor = tresors.get(pirate);
-            printW.println(pirate.getNomPirate() + " : " + tresor.getNom());
+            printW.println(pirate.getNomPirate() + ":" + tresor.getNom());
         }
 		System.out.println("Le fichier \"" + file + "\" a bien ete enregistre. (appuyez sur entree)");
        }catch (IOException err) {
