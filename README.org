@@ -28,9 +28,14 @@ Si vous ne pouvez pas utiliser de Makefile :
 1. compilez avec la commande
 
    ~javac -d bin -cp src src/up/mi/yt_am_bz/partage_butin/*/*.java~
-2. lancez le programme avec la commande
+2. Lancement du programme
+   + Cas classique : lancez le programme avec la commande
 
-   ~java -cp bin up/mi/yt_am_bz/partage_butin/programme.Main~
+    ~java -cp bin up/mi/yt_am_bz/partage_butin/programme.Main~
+
+   + Deuxième possibilité : comme la première mais en ajoutant directement en argument le fichier à importer
+
+    ~java -cp bin up/mi/yt_am_bz/partage_butin/programme.Main nom_fichier~
 
 * Précisions internes au code
 ** Premier rendu

@@ -17,7 +17,7 @@ public class LectureFichier
     /**
      * Methode permettant la lecture du fichier en parametre 
      * @param file le fichier
-     * @return
+     * @return l'equipage apres le parsing du fichier
      */
     public static Equipage lecture(String file)
     {

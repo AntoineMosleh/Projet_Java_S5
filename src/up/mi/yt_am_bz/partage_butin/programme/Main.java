@@ -4,8 +4,17 @@ import java.io.File;
 import java.util.Scanner;
 import up.mi.yt_am_bz.partage_butin.pirates.*;
 
+/**
+ * Point d'entree du programme
+ *
+ */
 public class Main 
 {
+	/**
+	 * fonction principale
+	 * @param args arguments ligne de commande
+	 *
+	 */
 	public static void main(String[] args)
     {
         String		fichier;
@@ -22,6 +31,11 @@ public class Main
         sc.close();
     }
 
+	/**
+	 * Menu de choix du fichier pour importer l'equipage
+	 * @param sc le Scanner du programme
+	 * @return le chemin vers le fichier choisi en String
+	 */
 	private static String choixFichier(Scanner sc)
 	{
 		File	fichier;
@@ -35,6 +49,12 @@ public class Main
 		return fichier.getPath();
 	}
 
+	/**
+	 * Menu principal du programme
+	 * @param sc le Scanner du programme
+	 * @param e l'equipage actuel du programme
+	 *
+	 */
 	private static void menu(Scanner sc, Equipage e)
 	{
 		int		choix = -1;
@@ -95,6 +115,12 @@ public class Main
 
 	}
 
+	/**
+	 * Menu pour sauvegarder une solution
+	 * @param e l'equipage actuel
+	 * @param sc le Scanner du programme
+	 *
+	 */
 	private static void menuSauvegarde(Equipage e, Scanner sc)
 	{
 		String	fileName;
@@ -107,7 +133,7 @@ public class Main
 	}
 
     /**
-     * Methode affichant et gérant le menu de resolution manuelle,
+     * Methode affichant et gerant le menu de resolution manuelle,
      *@param e l'equipage deja parametre
      *@param sc le scanner du menu principal
      */
@@ -189,13 +215,5 @@ public class Main
         }
         while (pirate1 == null || pirate2 == null);
         equipage.echangeObjet(pirate1, pirate2);
-	}
-
-	public static void sauvegarder(Equipage e,Scanner sc)
-	{
-		sc.nextLine();
-		System.out.print("Quel est le chemin vers le fichier de sauvegarde ? ");
-		String file = sc.nextLine();
-		SauvegardeFichier.sauvegarder(e, file);
 	}
 }

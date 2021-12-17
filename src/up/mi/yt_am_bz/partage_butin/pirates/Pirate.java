@@ -16,6 +16,7 @@ public class Pirate
 	 * Constructeur permettant d'initialiser le tableau des préférences pour chaque pirates
 	 * @param np le nom du pirate
 	 * @param nbPirate le nombre de pirates qui sera egale au nombres d'objets pour chaque pirates
+	 * @param numPirate l'ordre d'enregistrement du pirate dans l'equipage
 	 */
 	public Pirate(String np, int nbPirate, int numPirate)
 	{
@@ -24,16 +25,8 @@ public class Pirate
 		listePref = new Tresor[nbPirate];
 	}
 
-	public void incrementPreferences()
-	{
-		Tresor[] tmp = listePref;
-		listePref = new Tresor[listePref.length + 1];
-		for (int i = 0; i < listePref.length; i++)
-			listePref[i] = tmp[i];
-	}
-
 	/**
-	 * Méthode permettant de récupérer le nom du pirate
+	 * Methode permettant de recuperer le nom du pirate
 	 * @return le nom du pirate
 	 */
 	public String  getNomPirate()
@@ -134,7 +127,7 @@ public class Pirate
 	/**
 	 * Retourne l'indice d'un objet dans la liste de preferences
 	 * du pirate
-	 * @param nomObjet le nom de l'objet recherche
+	 * @param t le tresor recherche
 	 * @return l'indice de l'objet dans les preferences du pirate ou -1 si
 	 * l'objet n'est pas dans le tableau
 	 */

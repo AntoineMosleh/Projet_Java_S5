@@ -431,7 +431,7 @@ public class Equipage
 	}
 
 	/** Getter pour la liste des pirates
-	 *@return
+	 * @return liste des pirates
 	 */
 	public List<Pirate> getListePirate()
 	{
@@ -439,12 +439,18 @@ public class Equipage
 	}
 
 	/** Getter pour la matrice d'adjacence
-	 *@return */
+	 * @return la matrice d'adjacence
+	 */
 	public boolean[][] getMatriceAdjacence()
 	{
 		return matriceAdjacence;
 	}
 
+	/**
+	 * Getter pour la map d'affectation des tresors
+	 * @return l'affectation des tresors par pirate
+	 *
+	 */
 	public Map<Pirate,Tresor> getAffectationTresor()
 	{
 		return this.affectationTresors;
@@ -478,7 +484,7 @@ public class Equipage
 
 	/**
 	 * Getter du nombre de pirates
-	 * @return
+	 * @return le nombre de pirates
 	 */
 	public int getNbPirates()
 	{
@@ -496,7 +502,7 @@ public class Equipage
 
     /**
 	 * Methode permettant d'afficher les noms des membres de l'equipage
-	 * @return 
+	 * @return String contenant la composition de l'equipage
 	 */
 	public String compoEquipage()
 	{

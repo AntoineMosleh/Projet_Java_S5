@@ -19,6 +19,7 @@ public class Tresor
 
 	/**
 	 * Getter pour le nom de l'objet
+	 * @return le nom de l'objet
 	 */
 	public String getNom()
 	{
@@ -27,6 +28,7 @@ public class Tresor
 
 	/**
 	 * Setter pour le nom de l'objet
+	 * @param nom le nom de l'objet
 	 */
 	public void setNom(String nom)
 	{

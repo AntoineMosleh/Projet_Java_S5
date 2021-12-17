@@ -9,10 +9,10 @@ DEADLINE: <2021-12-17 Fri>
 ** DONE Ajouter classe Tresor
 ** DONE Liste des objets existants dans equipage
 
-** TODO Corriger erreurs du rendu 1 [50%]
+** DONE Corriger erreurs du rendu 1 [100%]
 **** DONE Ajouter packages
 **** DONE Enlever commentaires inline
-**** TODO Verifier warnings (?)
+**** DONE Verifier warnings (?)
 **** DONE Probleme calcul de cout
 **** DONE Resolution naive a corriger
 
@@ -28,7 +28,7 @@ A est jaloux de B ssi:
 2. A n'a pas son objet d'indice 0
 3. indice objet de A dans pref de A > indice objet de B dans A
 
-** TODO Menu (Refaire un main)
+** DONE Menu (Refaire un main)
 *** DONE Parsing fichier => Antoine (Nouvelle classe)
 *** DONE Gerer toutes les erreurs possibles de parsing
 *** DONE Implementer algo approximation (resolution automatique) (classe Equipage) => Bastien
@@ -36,6 +36,6 @@ A est jaloux de B ssi:
 *** DONE Resolution manuelle (Ajouter gestion des erreurs dans code existant)
 *** DONE Ameliorer algo approximation (Ne pas faire la meme solution deux fois par exemple)
 *** DONE Sauvegarde
-*** TODO GERER TOUTES ERREURS POSSIBLES
-*** TODO Finir la documentation de toutes les methodes et classes
+*** DONE GERER TOUTES ERREURS POSSIBLES
+*** DONE Finir la documentation de toutes les methodes et classes
 ** TODO Rendre projet
