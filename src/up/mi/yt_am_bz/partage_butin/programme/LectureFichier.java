@@ -14,14 +14,16 @@ import up.mi.yt_am_bz.partage_butin.pirates.*;
 public class LectureFichier
 {
 
+    /**
+     * Methode permettant la lecture du fichier en parametre 
+     * @param file le fichier
+     * @return
+     */
     public static Equipage lecture(String file)
     {
         BufferedReader bf = null;
         Pirate pirate = null;
         Tresor objet = null;
-        // int objet = 0;
-        //List<Pirate> pirates =new ArrayList<Pirate>();
-        // List<Integer> objets=new ArrayList<Integer>();
         int nbPirates = comptagePirates(file);
         /*Compteur permettant de connaitre l'ordre du pirate a ajouter*/
         int ordrePirate = 0;
@@ -69,7 +71,11 @@ public class LectureFichier
         return equipage;
     }
 
-
+    /**
+     * Methode permettant de compter le nombre de pirates de l'equipage a partir du fichier donné en parametre
+     * @param file le fichier
+     * @return
+     */
     private static int comptagePirates(String file)
     {
         int nombresPirates=0;
@@ -100,24 +106,35 @@ public class LectureFichier
         return nombresPirates;
     }
 
-
+    /**
+     * Methode permettant d'instancier un objet de la classe Pirate a partir d'une chaine de caractere 
+     * @param line chaine de caractere de la forme pirate(nom_pirate)
+     * @param nbPirates le nombre de pirates
+     * @param ordrePirate l'ordre du pirate
+     * @return
+     */
     private static Pirate parserPirate(String line,int nbPirates, int ordrePirate)
     {
         String infos = line.substring("pirate(".length(), line.length() - 2);
-		// String[] infosTab = infos.split(",");
-        // char nomP =infosTab[0].charAt(0);
-        // String nomP = infos;
 		return new Pirate(infos, nbPirates, ordrePirate);
     }
 
+    /**
+     * Methode permettant d'instancier un objet de la classe Tresor a partir d'une chaine de caractere
+     * @param line chaine de caractere de la forme "objet(nom_objet)"
+     * @return
+     */
     private static Tresor parserObjet(String line)
     {
         String infos = line.substring("objet(".length(), line.length() - 2);
-        // infos=infos.replace("o", "");
-		// return Integer.parseInt(infos);
         return (new Tresor(infos));
     }
-
+    
+    /**
+     * Methode permettant de creer une relation de jalousie entre 2 pirates a partir d'une chaine de caractere
+     * @param line chaine de caractere de la forme "deteste(nom_pirate1,nom_pirate2)"
+     * @param e equipage
+     */
     private static void parserDeteste(String line,Equipage e)
     {
         String infos = line.substring("deteste(".length(), line.length() - 2);
@@ -127,10 +144,15 @@ public class LectureFichier
         e.ajouterRelation(nomP1, nomP2);
     }
 
+    /**
+     * Methode permettant de creer une liste de preferences pour un pirate a partir d'une chaine de caractere
+     * @param line chaine de caractere de la forme "preferences(nom_pirate_1,nom_objet_1,nom_objet_2,nom_objet_3)"
+     * @param nbPirates nombre de pirate 
+     * @param e equipage
+     */
     private static void parserPreferences(String line,int nbPirates,Equipage e)
     {
         String infos = line.substring("preferences(".length(), line.length() - 2);
-        // infos=infos.replace("o", "");
 		String[] infosTab = infos.split(",");
         String nomP = infosTab[0];
         Tresor[] objets = new Tresor[nbPirates];
@@ -141,15 +163,9 @@ public class LectureFichier
             System.out.println("Erreur du nombre d'objets dans le fichier.");
             return;
         }
-        // String[] objets = Arrays.copyOfRange(infosTab, 1, infosTab.length);
+
         for (int i = 0; i + 1 < infosTab.length; i++)
             objets[i] = new Tresor(infosTab[i + 1]);
         e.ajoutPreferencePirate(nomP, objets);
-        // String[] objets = new String[nbPirates];
-        // for(int i = 1; i < infosTab.length; i++)
-        // {
-        //     objets[i-1] = infosTab[i];
-        // }
-        // e.ajoutPreferencePirate(nomP,objets);
     }
 }
